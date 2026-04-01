@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<!-- saved from url=(0224)file:///Users/home/Library/Application%20Support/Claude/local-agent-mode-sessions/61cf87ce-826f-40ef-ab80-33440d38da4b/e2182d55-e855-4011-b436-e33cac79c608/local_6f8db861-ba58-4c30-b5db-86d807025605/outputs/us_dashboard.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>US Accounts Dashboard · April 1, 2026</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f8fafc; color: #1e293b; font-size: 14px; line-height: 1.5; }
+
+/* LAYOUT */
+.app { display: flex; height: 100vh; overflow: hidden; }
+.sidebar { width: 220px; flex-shrink: 0; background: #fff; border-right: 1px solid #e2e8f0; display: flex; flex-direction: column; overflow: hidden; }
+.sidebar-header { padding: 20px 16px 14px; border-bottom: 1px solid #f1f5f9; }
+.sidebar-brand { font-size: 12px; font-weight: 700; color: #6366f1; letter-spacing: .08em; text-transform: uppercase; }
+.sidebar-date { font-size: 11.5px; color: #94a3b8; margin-top: 3px; }
+.sidebar-nav { flex: 1; overflow-y: auto; padding: 8px 0 16px; }
+.sidebar-nav::-webkit-scrollbar { width: 3px; }
+.sidebar-nav::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 3px; }
+.tab-item { display: flex; align-items: center; gap: 9px; padding: 7px 16px; cursor: pointer; font-size: 13px; color: #64748b; transition: background .1s, color .1s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; user-select: none; }
+.tab-item:hover { background: #f8fafc; color: #0f172a; }
+.tab-item.active { background: #f1f5f9; color: #0f172a; font-weight: 600; }
+.tab-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.main { flex: 1; overflow-y: auto; padding: 36px 40px; }
+.main::-webkit-scrollbar { width: 5px; }
+.main::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 5px; }
+
+/* PORTFOLIO */
+.portfolio-header { margin-bottom: 24px; }
+.portfolio-title { font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: -.02em; }
+.portfolio-meta { font-size: 13px; color: #94a3b8; margin-top: 5px; }
+.stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 32px; }
+.stat-card { border-radius: 12px; border: 1px solid; padding: 20px 22px; }
+.stat-count { font-size: 40px; font-weight: 800; line-height: 1; letter-spacing: -.03em; }
+.stat-label { font-size: 13px; font-weight: 600; margin-top: 4px; }
+.stat-arr { font-size: 11.5px; color: #94a3b8; margin-top: 5px; }
+.portfolio-section { margin-bottom: 32px; }
+.acc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(268px, 1fr)); gap: 14px; margin-top: 14px; }
+.acc-card { background: #fff; border-radius: 10px; border: 1px solid #e2e8f0; padding: 16px 18px; display: flex; flex-direction: column; gap: 10px; }
+.acc-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.acc-card-name { font-size: 14px; font-weight: 700; color: #0f172a; }
+.acc-card-arr { font-size: 12px; color: #94a3b8; margin-top: 2px; }
+.acc-card-summary { font-size: 12.5px; color: #64748b; line-height: 1.55; }
+.card-risks { display: flex; gap: 6px; flex-wrap: wrap; }
+.risk-chip { font-size: 11px; padding: 2px 9px; border-radius: 999px; font-weight: 600; }
+.risk-chip.red { background: #fee2e2; color: #dc2626; }
+.risk-chip.amber { background: #fef9c3; color: #b45309; }
+.acc-card-footer { display: flex; gap: 8px; flex-wrap: wrap; }
+.footer-chip { font-size: 11.5px; color: #64748b; background: #f1f5f9; padding: 2px 9px; border-radius: 999px; }
+.footer-chip.pm { color: #6366f1; background: #eef2ff; font-weight: 500; }
+.risk-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+.risk-row { display: flex; align-items: flex-start; gap: 12px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 11px 16px; }
+.risk-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 5px; }
+.risk-account { font-size: 12.5px; font-weight: 700; color: #0f172a; min-width: 130px; flex-shrink: 0; }
+.risk-desc { font-size: 12.5px; color: #475569; line-height: 1.5; }
+
+/* ACCOUNT TAB */
+.account-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+.account-header-left { display: flex; align-items: flex-start; gap: 14px; }
+.account-dot { width: 14px; height: 14px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+.account-title { font-size: 24px; font-weight: 800; color: #0f172a; letter-spacing: -.02em; }
+.account-meta { display: flex; align-items: center; gap: 8px; margin-top: 7px; flex-wrap: wrap; }
+.arr-chip { font-size: 12.5px; font-weight: 700; color: #1e293b; background: #f1f5f9; padding: 3px 11px; border-radius: 999px; }
+.health-badge { font-size: 11.5px; font-weight: 600; padding: 3px 11px; border-radius: 999px; }
+.health-badge.small { font-size: 11px; padding: 2px 9px; }
+.updated-chip { font-size: 12px; color: #94a3b8; }
+
+/* TEAM STRIP */
+.team-strip { display: flex; margin-bottom: 20px; border: 1px solid #e2e8f0; border-radius: 10px; overflow: hidden; background: #fff; }
+.team-item { flex: 1; padding: 12px 16px; border-right: 1px solid #f1f5f9; }
+.team-item:last-child { border-right: none; }
+.team-role { display: block; font-size: 10px; color: #94a3b8; text-transform: uppercase; letter-spacing: .07em; font-weight: 700; margin-bottom: 4px; }
+.team-name { display: block; font-size: 12.5px; font-weight: 600; color: #1e293b; }
+
+/* EXEC SUMMARY */
+.exec-summary { background: #fafaf9; border: 1px solid #e7e5e4; border-left: 3px solid #6366f1; border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 28px; }
+.exec-summary-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: #6366f1; margin-bottom: 6px; }
+.exec-summary p { font-size: 13.5px; color: #374151; line-height: 1.65; }
+
+/* SECTION HEADER */
+.section-header { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; color: #94a3b8; margin-bottom: 12px; }
+
+/* USE CASES */
+.uc-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+.uc-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px 20px; }
+.uc-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.uc-name { font-size: 13.5px; font-weight: 600; color: #1e293b; }
+.status-badge { font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: 999px; flex-shrink: 0; }
+/* Stage rail — labeled */
+.rl { display: flex; align-items: flex-start; margin-bottom: 14px; }
+.rs { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 58px; }
+.rd { display: block; width: 10px; height: 10px; border-radius: 50%; background: #e2e8f0; position: relative; z-index: 1; }
+.rs.done .rd { background: #22c55e; }
+.rs.active .rd { background: #6366f1; box-shadow: 0 0 0 3px #e0e7ff; }
+.rn { font-size: 8.5px; color: #cbd5e1; margin-top: 5px; text-align: center; line-height: 1.3; word-break: keep-all; }
+.rs.done .rn { color: #86efac; }
+.rs.active .rn { color: #6366f1; font-weight: 700; font-size: 9px; }
+.rc { flex: 1; height: 2px; margin-top: 4px; min-width: 4px; }
+.rc.done { background: #22c55e; }
+.rc.future { background: #e2e8f0; }
+.uc-notes { font-size: 12.5px; color: #64748b; line-height: 1.55; }
+.empty-note { font-size: 13px; color: #94a3b8; padding: 12px 0; }
+
+/* TWO-COLUMN GRID */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.col { display: flex; flex-direction: column; gap: 14px; }
+
+/* SECTION CARDS */
+.section-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px 18px; }
+.section-title { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: #1e293b; margin-bottom: 12px; }
+.section-icon { font-size: 14px; }
+.section-count { font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 999px; margin-left: auto; }
+.section-list { display: flex; flex-direction: column; gap: 9px; }
+.list-item { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; padding-bottom: 9px; border-bottom: 1px solid #f8fafc; }
+.list-item:last-child { border-bottom: none; padding-bottom: 0; }
+.item-desc { font-size: 12.5px; color: #374151; line-height: 1.5; flex: 1; }
+.item-owner { display: inline-block; font-size: 11px; color: #6366f1; background: #eef2ff; padding: 1px 8px; border-radius: 999px; margin-left: 6px; margin-top: 3px; font-weight: 500; }
+.item-eta { font-size: 11.5px; color: #94a3b8; white-space: nowrap; flex-shrink: 0; font-weight: 500; }
+
+@media (max-width: 960px) {
+  .two-col { grid-template-columns: 1fr; }
+  .stat-row { grid-template-columns: repeat(2, 1fr); }
+  .sidebar { width: 190px; }
+  .main { padding: 24px 20px; }
+  .team-strip { flex-wrap: wrap; }
+  .team-item { min-width: 50%; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <nav class="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-brand">US Accounts</div>
+      <div class="sidebar-date">April 1, 2026</div>
+    </div>
+    <div class="sidebar-nav">
+      <div class="tab-item active" onclick="showTab(0)" id="tabitem-0"><span class="tab-dot" style="background:#6366f1"></span>Portfolio</div><div class="tab-item" onclick="showTab(1)" id="tabitem-1"><span class="tab-dot" style="background:#f59e0b"></span>A Duie Pyle</div><div class="tab-item" onclick="showTab(2)" id="tabitem-2"><span class="tab-dot" style="background:#ef4444"></span>Assurant</div><div class="tab-item" onclick="showTab(3)" id="tabitem-3"><span class="tab-dot" style="background:#f59e0b"></span>Belcorp</div><div class="tab-item" onclick="showTab(4)" id="tabitem-4"><span class="tab-dot" style="background:#f59e0b"></span>Brown University</div><div class="tab-item" onclick="showTab(5)" id="tabitem-5"><span class="tab-dot" style="background:#f59e0b"></span>College Success Plan</div><div class="tab-item" onclick="showTab(6)" id="tabitem-6"><span class="tab-dot" style="background:#22c55e"></span>Docebo</div><div class="tab-item" onclick="showTab(7)" id="tabitem-7"><span class="tab-dot" style="background:#22c55e"></span>Elevation</div><div class="tab-item" onclick="showTab(8)" id="tabitem-8"><span class="tab-dot" style="background:#ef4444"></span>Goldcast</div><div class="tab-item" onclick="showTab(9)" id="tabitem-9"><span class="tab-dot" style="background:#f59e0b"></span>Greif</div><div class="tab-item" onclick="showTab(10)" id="tabitem-10"><span class="tab-dot" style="background:#22c55e"></span>PSG Global</div><div class="tab-item" onclick="showTab(11)" id="tabitem-11"><span class="tab-dot" style="background:#22c55e"></span>Shaw</div><div class="tab-item" onclick="showTab(12)" id="tabitem-12"><span class="tab-dot" style="background:#f59e0b"></span>Stowers</div>
+    </div>
+  </nav>
+  <main class="main">
+    <div class="tab-content" id="tab-0" style="display:block">
+  <div class="portfolio-header">
+    <div>
+      <h2 class="portfolio-title">US Portfolio Overview</h2>
+      <div class="portfolio-meta">12 accounts &nbsp;·&nbsp; $2.3M total ARR &nbsp;·&nbsp; Week of 2026</div>
+    </div>
+  </div>
+  <div class="stat-row"><div class="stat-card" style="background:#f0fdf4;border-color:#bbf7d0">
+      <div class="stat-count" style="color:#22c55e">4</div>
+      <div class="stat-label" style="color:#15803d">On Track</div>
+      <div class="stat-arr">$749K ARR</div>
+    </div><div class="stat-card" style="background:#fffbeb;border-color:#fde68a">
+      <div class="stat-count" style="color:#f59e0b">6</div>
+      <div class="stat-label" style="color:#b45309">Needs Attention</div>
+      <div class="stat-arr">$1.3M ARR</div>
+    </div><div class="stat-card" style="background:#fef2f2;border-color:#fecaca">
+      <div class="stat-count" style="color:#ef4444">2</div>
+      <div class="stat-label" style="color:#b91c1c">At Risk</div>
+      <div class="stat-arr">$275K ARR</div>
+    </div><div class="stat-card" style="background:#f9fafb;border-color:#e5e7eb">
+      <div class="stat-count" style="color:#9ca3af">0</div>
+      <div class="stat-label" style="color:#6b7280">Inactive</div>
+      <div class="stat-arr">$0 ARR</div>
+    </div></div>
+  <div class="portfolio-section"><div class="section-header">Top Risks &amp; Escalations</div><div class="risk-list"><div class="risk-row"><div class="risk-dot" style="background:#f59e0b"></div><span class="risk-account">A Duie Pyle</span><span class="risk-desc">PM change mid-project (Gene → Peter McFarren) risks continuity and coordination</span></div><div class="risk-row"><div class="risk-dot" style="background:#f59e0b"></div><span class="risk-account">A Duie Pyle</span><span class="risk-desc">ADP security concerns around chatbot UC may block or delay UC02 start</span></div><div class="risk-row"><div class="risk-dot" style="background:#ef4444"></div><span class="risk-account">Assurant</span><span class="risk-desc">Go-live dates for UC01 and UC02 remain undetermined — blocked on Assurant dependencies</span></div><div class="risk-row"><div class="risk-dot" style="background:#ef4444"></div><span class="risk-account">Assurant</span><span class="risk-desc">Prod environment handover delayed to Apr 15 (was Apr 3, originally Feb)</span></div><div class="risk-row"><div class="risk-dot" style="background:#f59e0b"></div><span class="risk-account">Belcorp</span><span class="risk-desc">Belcorp-side testing pace slow — Inventory Diagnosis UAT sign-off pending with 7 open items from client</span></div><div class="risk-row"><div class="risk-dot" style="background:#f59e0b"></div><span class="risk-account">Belcorp</span><span class="risk-desc">FFVV go-live date not yet confirmed by Belcorp (tentative 2-3 weeks out)</span></div></div></div>
+  <div class="portfolio-section">
+    <div class="section-header">All Accounts</div>
+    <div class="acc-grid"><div class="acc-card" style="border-top:3px solid #f59e0b">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">A Duie Pyle</div>
+          <div class="acc-card-arr">$150K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+      </div>
+      <p class="acc-card-summary">PM transition mid-project and multiple pending client dependencies are blocking UC01 build progress. UC02 (ADP chatbot) faces secu…</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 3 risks</span><span class="risk-chip amber">🚧 4 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">0/2 UCs live</span>
+        <span class="footer-chip pm">Archit Kumar</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #ef4444">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">Assurant</div>
+          <div class="acc-card-arr">$125K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#fee2e2;color:#dc2626">At Risk</span>
+      </div>
+      <p class="acc-card-summary">4 UCs in flight but go-live dates remain unset — production environment delayed to Apr 15 due to Assurant-side dependencies. All c…</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 4 risks</span><span class="risk-chip amber">🚧 5 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">0/4 UCs live</span>
+        <span class="footer-chip pm">Sonal M</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #f59e0b">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">Belcorp</div>
+          <div class="acc-card-arr">$250K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+      </div>
+      <p class="acc-card-summary">Belcorp is far more active than the main PM channel indicated — 10+ use cases across AI/Supply Chain and Finance tracks. Product R…</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 4 risks</span><span class="risk-chip amber">🚧 3 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">0/10 UCs live</span>
+        <span class="footer-chip pm">Soumya / Vinita / Shreya</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #f59e0b">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">Brown University</div>
+          <div class="acc-card-arr">$200K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+      </div>
+      <p class="acc-card-summary">3 of 4 UCs are in UAT, but chronic client-side delays (Wynette declining joint testing, Gemini billing issue) have pushed timeline…</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 4 risks</span><span class="risk-chip amber">🚧 3 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">0/4 UCs live</span>
+        <span class="footer-chip pm">Soumya Mangal</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #f59e0b">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">College Success Plan</div>
+          <div class="acc-card-arr">$120K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+      </div>
+      <p class="acc-card-summary">Contract expires April 2026. The Admin App board demo (Mar 25) is the make-or-break renewal moment — HubSpot is a credible alterna…</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 4 risks</span><span class="risk-chip amber">🚧 2 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">1/3 UCs live</span>
+        <span class="footer-chip pm">Vaishnavi Kishor</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #22c55e">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">Docebo</div>
+          <div class="acc-card-arr">$100K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#dcfce7;color:#16a34a">On Track</span>
+      </div>
+      <p class="acc-card-summary">Strongest performing account: 2 go-lives in one week, 150+ hours saved, 7 active UCs, and board-level visibility. Minor compliance…</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 1 risk</span><span class="risk-chip amber">🚧 1 blocker</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">4/7 UCs live</span>
+        <span class="footer-chip pm">Parth Agarwal</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #22c55e">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">Elevation</div>
+          <div class="acc-card-arr">$89K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#dcfce7;color:#16a34a">On Track</span>
+      </div>
+      <p class="acc-card-summary">7 of 11 UCs live following a successful annual review. ETL UAT sign-off has been pending 1+ month; product team response on framew…</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 3 risks</span><span class="risk-chip amber">🚧 2 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">3/7 UCs live</span>
+        <span class="footer-chip pm">Vinita Swami</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #ef4444">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">Goldcast</div>
+          <div class="acc-card-arr">$150K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#fee2e2;color:#dc2626">At Risk</span>
+      </div>
+      <p class="acc-card-summary">At serious risk — 0 queries on both live agents in March. Cvent acquisition creates organizational uncertainty around tooling and …</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 4 risks</span><span class="risk-chip amber">🚧 2 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">2/4 UCs live</span>
+        <span class="footer-chip pm">Tridisha Saikia</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #f59e0b">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">Greif</div>
+          <div class="acc-card-arr">$500K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+      </div>
+      <p class="acc-card-summary">Atlas soft launch shifted from Mar 25 to Apr 19 due to scope expansion. 5 UCs targeting Apr 19. Client flagging FDE availability; …</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 4 risks</span><span class="risk-chip amber">🚧 3 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">0/6 UCs live</span>
+        <span class="footer-chip pm">Girish Kamath</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #22c55e">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">PSG Global</div>
+          <div class="acc-card-arr">$300K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#dcfce7;color:#16a34a">On Track</span>
+      </div>
+      <p class="acc-card-summary">Active delivery across 5 UCs with 2 new opportunities (Data Lake, Sales UCs) identified this week. Minor third-party access blocke…</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 2 risks</span><span class="risk-chip amber">🚧 3 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">0/5 UCs live</span>
+        <span class="footer-chip pm">Deepshikha Tomer</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #22c55e">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">Shaw</div>
+          <div class="acc-card-arr">$260K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#dcfce7;color:#16a34a">On Track</span>
+      </div>
+      <p class="acc-card-summary">Breakout account — $260K add-on signed, 2 UCs live with strong adoption, 13 new UCs in pipeline. Q2 target: 20–30 UCs. ServiceNow …</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 2 risks</span><span class="risk-chip amber">🚧 2 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">2/5 UCs live</span>
+        <span class="footer-chip pm">Sonal M</span>
+      </div>
+    </div><div class="acc-card" style="border-top:3px solid #f59e0b">
+      <div class="acc-card-header">
+        <div>
+          <div class="acc-card-name">Stowers</div>
+          <div class="acc-card-arr">$50K ARR</div>
+        </div>
+        <span class="health-badge small" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+      </div>
+      <p class="acc-card-summary">UC01 soft go-live to IT dept on Apr 1. A 503 first-query error and limited initial rollout scope are creating confidence risks. UC…</p>
+      <div class="card-risks"><span class="risk-chip red">⚠ 3 risks</span><span class="risk-chip amber">🚧 3 blockers</span></div>
+      <div class="acc-card-footer">
+        <span class="footer-chip">0/3 UCs live</span>
+        <span class="footer-chip pm">Raghav K</span>
+      </div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-1" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#f59e0b"></div>
+      <div>
+        <h2 class="account-title">A Duie Pyle</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$150K ARR</span>
+          <span class="health-badge" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+          <span class="updated-chip">Updated Mar 12, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Christopher Miller</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Aditya Gupta</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Archit Kumar</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Kanala V</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>PM transition mid-project and multiple pending client dependencies are blocking UC01 build progress. UC02 (ADP chatbot) faces security objections, putting the March go-live at risk.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC01: Email AI Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Build reviews in progress. PM changed: Gene replaced by Peter McFarren. Multiple client dependencies pending.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC02: ADP GPT (Chatbot)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Security concerns from ADP on chatbot. Discovery yet to be formally confirmed.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">PM change mid-project (Gene → Peter McFarren) risks continuity and coordination<span class="item-owner">Soumya Mangal</span></div></div><div class="list-item"><div class="item-desc">ADP security concerns around chatbot UC may block or delay UC02 start<span class="item-owner">Rutul Tarnekar</span></div></div><div class="list-item"><div class="item-desc">Go-live target of March-end at risk due to pending client dependencies<span class="item-owner">Aditya Gupta</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Clarity on which Salesforce tables to use — pending ADP</div></div><div class="list-item"><div class="item-desc">Email labels list not yet provided by ADP</div></div><div class="list-item"><div class="item-desc">Outlook EWS credentials needed from ADP</div></div><div class="list-item"><div class="item-desc">Reply templates per department pending from ADP</div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">3 Discovery sessions completed for UC01 (Email AI Agent)</div></div><div class="list-item"><div class="item-desc">Build Review Session 1 completed — email routing, blocking logic, department classification built</div></div><div class="list-item"><div class="item-desc">Salesforce ticket creation and outbound email automation in progress</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Introduction sync with new PM Peter McFarren<span class="item-owner">Sandeep Sharma</span></div><span class="item-eta">ASAP</span></div><div class="list-item"><div class="item-desc">UC01 BRD closure + build ready for go-live<span class="item-owner">Aditya Gupta</span></div><span class="item-eta">End of March (at risk)</span></div><div class="list-item"><div class="item-desc">UC02 Discovery confirmation from ADP<span class="item-owner">Rutul Tarnekar</span></div><span class="item-eta">This week</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-2" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#ef4444"></div>
+      <div>
+        <h2 class="account-title">Assurant</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$125K ARR</span>
+          <span class="health-badge" style="background:#fee2e2;color:#dc2626">At Risk</span>
+          <span class="updated-chip">Updated Apr 1, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Thayer Glass</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Rahul Bhanushali</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Sonal M</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Santosh Singh</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>4 UCs in flight but go-live dates remain unset — production environment delayed to Apr 15 due to Assurant-side dependencies. All critical path items are blocked by the client.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC01: PeopleIQ (Text2DAX Analytics)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Build in progress on synthetic data. FE complete. RBAC blocked on hierarchy table from client. Text2DAX accuracy at 70%.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC02: Knowledge Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">BRD V3 shared Mar 31. SharePoint tenant ID pending. Build blocked on BRD sign-off.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC03: Academy / Power Automate Replacement</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">In progress. Workday connector documentation shared.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC04: Slide Generator (NEW)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Proposed as quick win. Walkthrough scheduled Apr 7. Go-live unlikely before end of May.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Go-live dates for UC01 and UC02 remain undetermined — blocked on Assurant dependencies<span class="item-owner">Sonal Menon</span></div></div><div class="list-item"><div class="item-desc">Prod environment handover delayed to Apr 15 (was Apr 3, originally Feb)<span class="item-owner">Assurant</span></div></div><div class="list-item"><div class="item-desc">Slide Generator go-live unlikely before end of May even if prod env ready mid-May<span class="item-owner">Sonal Menon</span></div></div><div class="list-item"><div class="item-desc">RBAC evaluation blocked until Assurant provides hierarchy table<span class="item-owner">Kashish Patel / Navaneshwar Reddy</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">5</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Production environment handover — Assurant ETA: Apr 15<span class="item-owner">Assurant</span></div></div><div class="list-item"><div class="item-desc">SharePoint tenant ID pending for Knowledge Agent connection<span class="item-owner">Assurant</span></div></div><div class="list-item"><div class="item-desc">Knowledge Agent BRD sign-off pending (V3 shared Mar 31)<span class="item-owner">Assurant</span></div></div><div class="list-item"><div class="item-desc">Hierarchy table for RBAC not yet provided<span class="item-owner">Assurant</span></div></div><div class="list-item"><div class="item-desc">MS Teams embedding credentials and setup — in progress<span class="item-owner">Assurant</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">5</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">FE build complete for PeopleIQ based on client-approved prototype</div></div><div class="list-item"><div class="item-desc">Text2DAX accuracy improved to 70% on 4 tables with few-shot learning</div></div><div class="list-item"><div class="item-desc">SSO completed</div></div><div class="list-item"><div class="item-desc">Zscaler issue partially resolved — UA unblocked</div></div><div class="list-item"><div class="item-desc">BRD V3 for Knowledge Agent shared (Mar 31)</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Slide Generator demo walkthrough<span class="item-owner">Sonal Menon</span></div><span class="item-eta">Apr 7</span></div><div class="list-item"><div class="item-desc">Knowledge Agent BRD sign-off<span class="item-owner">Assurant</span></div><span class="item-eta">Apr 3</span></div><div class="list-item"><div class="item-desc">Production environment handover<span class="item-owner">Assurant</span></div><span class="item-eta">Apr 15</span></div><div class="list-item"><div class="item-desc">MS Teams embedding setup<span class="item-owner">Assurant</span></div><span class="item-eta">Apr 7 (not UAT blocker)</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-3" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#f59e0b"></div>
+      <div>
+        <h2 class="account-title">Belcorp</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$250K ARR</span>
+          <span class="health-badge" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+          <span class="updated-chip">Updated Apr 1, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">—</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Anwar M</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Soumya / Vinita / Shreya</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Abhishek S / Vaibhav D</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>Belcorp is far more active than the main PM channel indicated — 10+ use cases across AI/Supply Chain and Finance tracks. Product Replenishment go-live confirmed for Apr 6 (UAT sign-off received Mar 31). FFVV beta go-live in ~2 weeks (Peru-first rollout). Key risk: Belcorp-side testing pace is slow, causing UAT sign-off delays across Inventory Diagnosis and Finance UCs.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">FFVV (Field Force Visibility &amp; Validation)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">UAT in progress. 4 open JIRA tickets (0 blocking beta). Beta go-live in ~2 weeks, starting with Peru region.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">Product Replenishment</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">UAT sign-off received Mar 31. Table visualization feature to be added by Apr 3. Go-live scheduled Apr 6.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">Inventory Diagnosis</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">QA and reviews done. UAT testing pending on Belcorp — 7 open items (4 passed retest, 7 open).</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">Gen AI Portal</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Configuration completed Mar 31. UAT handed over to Belcorp team Mar 31. Timelines for sign-off to be aligned.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC05: Auto Distribution of Business &amp; Competitor News</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Client confirmed UAT completion on call; formal sign-off pending. Production migration targeted Apr 1.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC04: Tax Audit Process Automation</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Build in progress. Targeted completion Apr 3. Redacted files shared; Belcorp review feedback pending.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC01: New Product Process Costing</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Minor BRD feedback received. Clarifications to be shared by Apr 1. Wireframe design in progress (ETA Apr 2).</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC02: Cash Position Automation</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">PRD shared. BRD preparation targeted Apr W1.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC03: Automatic Reconciliation in Banking</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">PRD shared. BRD preparation targeted Apr W3.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">Quality Control / Waste Mgmt / Inventory Supply / Forecast / Line Assembly / Campaigns</span></div>
+      <div class="rl"><div class="rs active"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">6 additional UCs identified. Will be picked up after current wave of go-lives.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Belcorp-side testing pace slow — Inventory Diagnosis UAT sign-off pending with 7 open items from client<span class="item-owner">Vinita Swami</span></div></div><div class="list-item"><div class="item-desc">FFVV go-live date not yet confirmed by Belcorp (tentative 2-3 weeks out)<span class="item-owner">Soumya Mangal</span></div></div><div class="list-item"><div class="item-desc">Finance UC04 FE review pending before production migration<span class="item-owner">Tridisha Saikia</span></div></div><div class="list-item"><div class="item-desc">No visibility from old PM channel (#belcorp-internal-pm) — all active updates in separate track channels<span class="item-owner">Sachin Prabhakar</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Inventory Diagnosis: Belcorp team availability for joint testing — 7 items open<span class="item-owner">Belcorp</span></div></div><div class="list-item"><div class="item-desc">Gen AI Portal: UAT timeline not yet confirmed by Belcorp team<span class="item-owner">Belcorp</span></div></div><div class="list-item"><div class="item-desc">UC05 News Distribution: Formal UAT sign-off pending (verbal confirmation received)<span class="item-owner">Belcorp</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">5</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Product Replenishment formal UAT sign-off received Mar 31 — go-live Apr 6 confirmed</div></div><div class="list-item"><div class="item-desc">Gen AI Portal UAT successfully handed over to Belcorp Mar 31</div></div><div class="list-item"><div class="item-desc">FFVV: All beta-blocking JIRA tickets cleared (0 blockers remaining)</div></div><div class="list-item"><div class="item-desc">FFVV stress testing completed successfully</div></div><div class="list-item"><div class="item-desc">Execution plan revised: phased 3-UC-at-a-time delivery model adopted</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">5</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Product Replenishment go-live (Peru region first)<span class="item-owner">Vinita Swami</span></div><span class="item-eta">Apr 6</span></div><div class="list-item"><div class="item-desc">UC05 News Distribution production migration<span class="item-owner">Tridisha Saikia</span></div><span class="item-eta">Apr 1–2</span></div><div class="list-item"><div class="item-desc">UC04 Tax Audit build completion<span class="item-owner">Tridisha Saikia</span></div><span class="item-eta">Apr 3</span></div><div class="list-item"><div class="item-desc">FFVV beta go-live<span class="item-owner">Soumya Mangal</span></div><span class="item-eta">~Mid April</span></div><div class="list-item"><div class="item-desc">Pick next 3 UCs for Wave 2 delivery<span class="item-owner">Lovish Arya</span></div><span class="item-eta">Apr 1 (today)</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-4" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#f59e0b"></div>
+      <div>
+        <h2 class="account-title">Brown University</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$200K ARR</span>
+          <span class="health-badge" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+          <span class="updated-chip">Updated Mar 28, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Christopher Miller</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Aditya Gupta</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Soumya Mangal</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Vaibhav Dhand</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>3 of 4 UCs are in UAT, but chronic client-side delays (Wynette declining joint testing, Gemini billing issue) have pushed timelines 2–3 months. CIO escalation is in progress.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC01: Contract Request Validation (SPC)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Step 1 in UAT. Step 2 trigger issue (Jaggaer feature broken). DocuSign step deprioritized for now.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC02: Account Reconciliation</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">UAT handed over Feb 20. Wynette declining joint testing. Delays of ~2 months overall.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC03: SFS Chatbot</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">UAT handed over Mar 4. Gemini LLM billing issue causing blocks. Brown team unavailable for joint testing.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC04: TBD (Research / Grants)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Initial discussion done Feb 13. Discovery sessions to start end of March.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Systematic client unavailability — Wynette (UC02/03 POC) declining joint testing calls<span class="item-owner">Christopher Miller</span></div></div><div class="list-item"><div class="item-desc">Gemini Vertex LLM billing issue blocking UC01 build and UC03 UAT<span class="item-owner">Brown University</span></div></div><div class="list-item"><div class="item-desc">Overall delays of 2-3 months across all UCs — escalated to Ragy &amp; Pavitar<span class="item-owner">Sumeet Nandal</span></div></div><div class="list-item"><div class="item-desc">No alignment on UAT to Production migration plan<span class="item-owner">Sumeet Nandal</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Wynette unwilling to do joint testing — CIO to intervene<span class="item-owner">Chris Keith (Brown CIO)</span></div></div><div class="list-item"><div class="item-desc">Gemini Vertex billing not resolved — main LLM POC was OOO<span class="item-owner">Brown University</span></div></div><div class="list-item"><div class="item-desc">Jaggaer feature (Step 2 trigger for UC01) stopped working — alternate approach needed<span class="item-owner">Soumya Mangal</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">3 of 4 UCs successfully moved to UAT — shoutout to Soumya Patel and Shivam Kumar</div></div><div class="list-item"><div class="item-desc">Positive in-person meeting with CIO Chris Keith and Brown leadership (Mar 23)</div></div><div class="list-item"><div class="item-desc">Brown leadership recognized the team's quality of work</div></div><div class="list-item"><div class="item-desc">UC01 Step 1 UAT handover completed</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">CIO Chris Keith to meet with Wynette about joint testing commitment<span class="item-owner">Chris Keith</span></div><span class="item-eta">This week</span></div><div class="list-item"><div class="item-desc">Internal debrief call with Ragy on Brown risk<span class="item-owner">Sumeet Nandal / Gautam Anand</span></div><span class="item-eta">Imminent</span></div><div class="list-item"><div class="item-desc">UC04 Discovery sessions to start<span class="item-owner">Soumya Mangal</span></div><span class="item-eta">End of March</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-5" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#f59e0b"></div>
+      <div>
+        <h2 class="account-title">College Success Plan</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$120K ARR</span>
+          <span class="health-badge" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+          <span class="updated-chip">Updated Mar 11, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Christopher Miller</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Rahul Bhanushali</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Vaishnavi Kishor</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Prakhar Joshi</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>Contract expires April 2026. The Admin App board demo (Mar 25) is the make-or-break renewal moment — HubSpot is a credible alternative if the demo underdelivers.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">Admin App</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Targeting handover to CSP by Mar 14 for Board meeting on Mar 25. Focused show for board — needs to clearly surpass HubSpot.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">Coach App</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Live with select coaches. Non-technical users struggling with login and basic usage. Phased rollout to June 2026.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#f3f4f6;color:#6b7280">On Hold</span><span class="uc-name">Student App</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Work paused pending confirmation from Chris / CSP on scope and direction.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Contract expiring April 2026 — renewal at risk if board demo doesn't deliver<span class="item-owner">Christopher Miller / Colin Callahan</span></div></div><div class="list-item"><div class="item-desc">CSP considering HubSpot ($40K/yr) if Admin App doesn't clearly surpass it<span class="item-owner">Christopher Miller</span></div></div><div class="list-item"><div class="item-desc">Non-technical coach users struggling with platform — perception issue<span class="item-owner">Vaishnavi Kishor</span></div></div><div class="list-item"><div class="item-desc">Student App paused — scope ambiguity with client<span class="item-owner">Christopher Miller</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">2</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">CSP confirmation on Coach App features to keep/remove — pending<span class="item-owner">CSP / Elizabeth</span></div></div><div class="list-item"><div class="item-desc">CSP team availability very limited; cannot commit to frequent testing sessions<span class="item-owner">Christopher Miller</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Admin App targeted for board presentation on Mar 25</div></div><div class="list-item"><div class="item-desc">Show &amp; Tell conducted on Mar 6 — positive outcome</div></div><div class="list-item"><div class="item-desc">First coaches onboarded and using Coach App</div></div><div class="list-item"><div class="item-desc">CSP team committed to continuing partnership (post Feb 4 call)</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Admin + Coach App handover to CSP for testing<span class="item-owner">Vaishnavi Kishor / Rahul Bhanushali</span></div><span class="item-eta">Mar 14</span></div><div class="list-item"><div class="item-desc">Board presentation demo (Admin App)<span class="item-owner">Christopher Miller</span></div><span class="item-eta">Mar 25</span></div><div class="list-item"><div class="item-desc">Contract renewal decision<span class="item-owner">Sumeet Nandal / Colin Callahan</span></div><span class="item-eta">April 2026</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-6" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#22c55e"></div>
+      <div>
+        <h2 class="account-title">Docebo</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$100K ARR</span>
+          <span class="health-badge" style="background:#dcfce7;color:#16a34a">On Track</span>
+          <span class="updated-chip">Updated Mar 30, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Christopher Miller</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Anwar M</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Parth Agarwal</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Prakhar Joshi</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>Strongest performing account: 2 go-lives in one week, 150+ hours saved, 7 active UCs, and board-level visibility. Minor compliance risk on LLM keys is the only open issue.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">Digital BR Deck Generator</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Live. 60+ BR decks generated, 150+ hours saved. Shown to Docebo's Board of Directors.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">Quarterly Insight Snapshot</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Live. 70+ snapshots created. Supporting 4,000+ CSM-managed accounts.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">VoC Dashboard V1/V1.5</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Went live Mar 30. NPS + Gong insights unified for executive leadership.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">Solution Blueprint Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Went live Mar 30. Blueprint creation reduced from 1-3 hours to &lt;5 minutes (~90% reduction).</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">Sales Handoff Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">In UAT. Show &amp; Tell completed, positive feedback.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">BD Handoff Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">MVP Show &amp; Tell done Mar 20. Phase 1 scope agreed. BRD finalization in progress.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">VoC V2</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Adding Zendesk, CSAT and additional data sources. Scope aligned.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">1</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Docebo using UA LLM keys — compliance issue flagged; need client to provide own keys<span class="item-owner">Pratik Singh / Santosh Singh</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">1</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">LLM keys: Docebo yet to fully switch to their own keys (compliance risk)<span class="item-owner">Pratik Singh</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">6</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">2 more go-lives in one week: VoC V1.5 + Solution Blueprint Agent (Mar 30)</div></div><div class="list-item"><div class="item-desc">~90% reduction in blueprint creation time</div></div><div class="list-item"><div class="item-desc">Docebo leadership presented UnifyApps to their Board of Directors</div></div><div class="list-item"><div class="item-desc">CRO &amp; CMO positive feedback on the platform</div></div><div class="list-item"><div class="item-desc">150+ hours saved, 60+ BR decks, 70+ snapshots in first 2 weeks post go-live</div></div><div class="list-item"><div class="item-desc">Daily positive feedback from reps: 'This is awesome. This saves so much time.'</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Content BR Deck Generator — next go-live target<span class="item-owner">Parth Agarwal</span></div><span class="item-eta">TBD</span></div><div class="list-item"><div class="item-desc">VoC V2 build completion (Zendesk + CSAT)<span class="item-owner">Parth Agarwal</span></div><span class="item-eta">TBD</span></div><div class="list-item"><div class="item-desc">BD Handoff Agent — Phase 1 build<span class="item-owner">Pratik Singh</span></div><span class="item-eta">TBD</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-7" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#22c55e"></div>
+      <div>
+        <h2 class="account-title">Elevation</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$89K ARR</span>
+          <span class="health-badge" style="background:#dcfce7;color:#16a34a">On Track</span>
+          <span class="updated-chip">Updated Mar 25, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Christopher Miller</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Anwar M</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Vinita Swami</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Kanala V / Vaibhav D</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>7 of 11 UCs live following a successful annual review. ETL UAT sign-off has been pending 1+ month; product team response on framework enhancements is overdue.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">Shopify B2B/B2C | Circle K | DSD | Distribution | Bill.com</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">5 UCs live. Running smoothly.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">UC7: Payment Integration</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Live since Jan 8. Running smoothly.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">UC8: Netsuite to ChatGPT Integration</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Live since Feb 20.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC6: ETL Pipelines (7 sources)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">All Phase 1 &amp; 2 pipelines live in UAT. Client requested to keep in UAT until further notice. UAT sign-off pending.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC9: Expensify to Bill.com Automation</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Build complete Mar 13. UAT testing started Mar 16.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC10: CSV to Sales Order Automation</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Build complete Mar 13. UAT started Mar 16. Plan to move to prod Mar 24.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#fef9c3;color:#ca8a04">POC</span><span class="uc-name">UC11: Predictive Re-Order Agent (POC)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">First discovery call Mar 11. BRD documentation to be initiated.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">ETL UAT sign-off has been pending for 1+ month — Manav requesting Elevation to commit to timeline<span class="item-owner">Manav Gupta</span></div></div><div class="list-item"><div class="item-desc">ETL product feature enhancement response from product team still pending<span class="item-owner">Vaibhav Dhand</span></div></div><div class="list-item"><div class="item-desc">ETL framework concerns: missing audit timestamps, throughput issues (NetSuite pulls 500 records/5 min)<span class="item-owner">Mohammed Anwar</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">2</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">ETL UAT sign-off: Elevation not committing; pipelines running live in UAT for 1 month<span class="item-owner">Vinita Swami</span></div></div><div class="list-item"><div class="item-desc">ETL product enhancements not yet shared with client — pending plan from product team<span class="item-owner">Vaibhav Dhand</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">5</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">7/11 use cases now live</div></div><div class="list-item"><div class="item-desc">Successful annual in-person review with Elevation leadership (Mar 25)</div></div><div class="list-item"><div class="item-desc">UC9 and UC10 both completed build and entered UAT on Mar 16</div></div><div class="list-item"><div class="item-desc">VIP Karma and Repsly tables migrated to Prod</div></div><div class="list-item"><div class="item-desc">UC8 Netsuite to ChatGPT live since Feb 20</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">VIP Karma Cleansed data migration to Prod<span class="item-owner">Manav Gupta</span></div><span class="item-eta">Mar 27</span></div><div class="list-item"><div class="item-desc">UC11 BRD initiation — Predictive Re-Order Agent<span class="item-owner">Kosles Gautam</span></div><span class="item-eta">TBD</span></div><div class="list-item"><div class="item-desc">ETL product enhancement response to client<span class="item-owner">Vaibhav Dhand</span></div><span class="item-eta">Overdue</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-8" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#ef4444"></div>
+      <div>
+        <h2 class="account-title">Goldcast</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$150K ARR</span>
+          <span class="health-badge" style="background:#fee2e2;color:#dc2626">At Risk</span>
+          <span class="updated-chip">Updated Mar 23, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Colin Callahan</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Mitali Jinger</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Tridisha Saikia</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Santosh Singh</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>At serious risk — 0 queries on both live agents in March. Cvent acquisition creates organizational uncertainty around tooling and renewal. Immediate executive alignment needed.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">UC01: Account Brief Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Live since Jan 29. CRITICAL: 0 queries in March. Low adoption. Salesforce + Snowflake connections reactivated.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">UC02: Internal Knowledge Search Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Live since Jan 29 (non-billing UC). Low adoption. Official announcement still pending from Goldcast mgmt.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#f3f4f6;color:#6b7280">On Hold</span><span class="uc-name">UC03: Cohort Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Deprioritized until existing agent adoption increases.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#f3f4f6;color:#6b7280">On Hold</span><span class="uc-name">UC04: QBR Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Deprioritized. No defined business requirement.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Account at renewal risk — Goldcast acquired by Cvent; may not renew next year<span class="item-owner">Colin Callahan / Taymour Bassiri</span></div></div><div class="list-item"><div class="item-desc">UC01 adoption at zero in March (0 queries, 0 unique users) — value realization at serious risk<span class="item-owner">Tridisha Saikia</span></div></div><div class="list-item"><div class="item-desc">Goldcast corporate Slack moving to Cvent Slack — current channel may be deactivated<span class="item-owner">Taymour Bassiri</span></div></div><div class="list-item"><div class="item-desc">New use cases deprioritized due to absence of defined business requirements<span class="item-owner">Tridisha Saikia</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">2</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Official announcement on agent usage still pending from Goldcast management<span class="item-owner">Taymour Bassiri / Khari</span></div></div><div class="list-item"><div class="item-desc">Cvent acquisition creating organizational uncertainty — Goldcast giving up corporate tools<span class="item-owner">Taymour Bassiri</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Salesforce and Snowflake connections reactivated after whitelisting issue</div></div><div class="list-item"><div class="item-desc">UC01 and UC02 both live in production since Jan 29</div></div><div class="list-item"><div class="item-desc">Agent accuracy benchmarked at 4.5/5.0</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Executive alignment discussion with Goldcast / Cvent leadership<span class="item-owner">Colin Callahan / Taymour Bassiri</span></div><span class="item-eta">Urgent</span></div><div class="list-item"><div class="item-desc">Competitive positioning document: UnifyApps vs Cvent Agentic AI<span class="item-owner">Puru Verma / Bhavya Sharma</span></div><span class="item-eta">TBD</span></div><div class="list-item"><div class="item-desc">Migration to Cvent Slack channel<span class="item-owner">Taymour Bassiri</span></div><span class="item-eta">TBD</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-9" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#f59e0b"></div>
+      <div>
+        <h2 class="account-title">Greif</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$500K ARR</span>
+          <span class="health-badge" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+          <span class="updated-chip">Updated Mar 25, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Colin Callahan</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Rahul Bhanushali</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Girish Kamath</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Abhishek Singh</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>Atlas soft launch shifted from Mar 25 to Apr 19 due to scope expansion. 5 UCs targeting Apr 19. Client flagging FDE availability; governance approvals for connectors are slow.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC06: Greif Atlas (ChatGPT Replacement)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Soft launch moved from Mar 25 to Apr 19. Feature scope expanded to Day-60 list by POD leader. ~20 users actively testing v1.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC01: Packaging Advice</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Requirements gathered. Combined BRD + Technical Design in progress. Apr 19 first iteration go-live.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC02: VAS Leakage</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">BRD shared by client. Feature set finalized. Design review to be scheduled. Apr 19 target.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC03: BOM Reconciliation</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Requirements collated. Handover from Prachi to Tushar Gupta. Apr 19 first iteration target.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC04: MFG Cost</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Greif data team driving in self-service model. Labor costs, manufacturing costs, OIH reporting in progress.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC05: Transport Cost</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Freight leakage detection as first iteration. PMDB Snowflake agent under development.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">FDE availability: client complaining about lack of real-time availability on Teams and Email<span class="item-owner">Mudit Dwivedi</span></div></div><div class="list-item"><div class="item-desc">Atlas launch moved from Mar 25 to Apr 19 — scope creep from POD leader adding Day-60 features<span class="item-owner">Abhay Mishra</span></div></div><div class="list-item"><div class="item-desc">OpenAI Enterprise BYOK keys needed before Atlas launch — tactical arrangement continuing<span class="item-owner">Greif</span></div></div><div class="list-item"><div class="item-desc">Governance process slow for approving Snowflake, Outlook, Infor LN connectors<span class="item-owner">Greif Governance</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">OpenAI Enterprise keys (BYOK) — needed before Apr 19 Atlas launch<span class="item-owner">Greif</span></div></div><div class="list-item"><div class="item-desc">Snowflake, Outlook, Infor LN connector governance approvals — ETA unknown<span class="item-owner">Greif Governance</span></div></div><div class="list-item"><div class="item-desc">Platform-level guidelines document requested by Greif (agent best practices, data architecture)<span class="item-owner">Abhishek Singh</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">5</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Outlook connector permission approved for admin group (6 users)</div></div><div class="list-item"><div class="item-desc">Atlas Day-30 feature list delivered</div></div><div class="list-item"><div class="item-desc">2-day workshop (hackathon) completed with Greif POD leads (Mar 17-18)</div></div><div class="list-item"><div class="item-desc">SSO role setup with AD groups completed</div></div><div class="list-item"><div class="item-desc">VPN/firewall architecture discussion with Greif IT team initiated</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Greif Atlas soft launch (v2 / Day-60 features)<span class="item-owner">Abhay Mishra / Mudit Dwivedi</span></div><span class="item-eta">Apr 19</span></div><div class="list-item"><div class="item-desc">SCIM RFC-compliant API delivery<span class="item-owner">Sai Krishna Kothapalli</span></div><span class="item-eta">Apr 12</span></div><div class="list-item"><div class="item-desc">Onsite FDE-level training for Greif POD members<span class="item-owner">Abhishek Singh</span></div><span class="item-eta">Early April</span></div><div class="list-item"><div class="item-desc">First iterations of UC01-05 go-live<span class="item-owner">Girish Kamath</span></div><span class="item-eta">Apr 19</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-10" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#22c55e"></div>
+      <div>
+        <h2 class="account-title">PSG Global</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$300K ARR</span>
+          <span class="health-badge" style="background:#dcfce7;color:#16a34a">On Track</span>
+          <span class="updated-chip">Updated Apr 1, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Christopher Miller</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Aditya Gupta</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Deepshikha Tomer</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Kanala V</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>Active delivery across 5 UCs with 2 new opportunities (Data Lake, Sales UCs) identified this week. Minor third-party access blockers; overall trajectory is positive.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC01: Attrition Workflow Automation</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">BRD approved. Released to QA Mar 27. UAT sign-off and go-live TBD.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC02: Anna AI Insights Dashboard</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Persona-based reporting (internal vs external) scoped. Mockups in design review with Abhishek / Rohan.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC03: Executive Dashboard</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Deep dive sessions done. Data architecture mapped. Automation roadmap proposed. GitHub + Confluence access being set up.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC04: Data Lake / Microsoft Fabric Ingestion (NEW)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Discussed Apr 1. PSG building centralized data platform; UnifyApps proposed for ingestion + data unification layer.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC05: Sales Use Cases (NEW)</span></div>
+      <div class="rl"><div class="rs active"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Discussed Mar 31. Use case template shared. BRD process to follow.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">2</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">ThinkBridge dashboard code access blocked — exec dashboard ingestion blocked<span class="item-owner">Padma CR</span></div></div><div class="list-item"><div class="item-desc">Power BI connector refresh testing pending — needed before go-live<span class="item-owner">Padma CR</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">ThinkBridge to share executive dashboard codebase — awaiting response<span class="item-owner">Colton Henderson (PSG)</span></div></div><div class="list-item"><div class="item-desc">Confluence access needed for UC03 documentation reference<span class="item-owner">Colton Henderson (PSG)</span></div></div><div class="list-item"><div class="item-desc">Compass Azure SQL API credentials needed for Anna AI backend<span class="item-owner">Colton Henderson (PSG)</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">5</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">SharePoint connector issue resolved — now operational</div></div><div class="list-item"><div class="item-desc">OneDrive connection established for Attrition Workflow (UC01)</div></div><div class="list-item"><div class="item-desc">Data mapping completed for 23/50 attrition columns</div></div><div class="list-item"><div class="item-desc">UC01 Attrition Workflow released to QA (Mar 27)</div></div><div class="list-item"><div class="item-desc">New sales use cases and data lake opportunity identified (Apr 1)</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">UC01 Attrition Workflow UAT sign-off and go-live<span class="item-owner">Padma CR / Ritik Yadav</span></div><span class="item-eta">TBD</span></div><div class="list-item"><div class="item-desc">Anna AI Dashboard mockup finalization with client<span class="item-owner">Padma CR</span></div><span class="item-eta">TBD</span></div><div class="list-item"><div class="item-desc">Executive Dashboard data-flow design and phased automation roadmap<span class="item-owner">Padma CR</span></div><span class="item-eta">TBD</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-11" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#22c55e"></div>
+      <div>
+        <h2 class="account-title">Shaw</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$260K ARR</span>
+          <span class="health-badge" style="background:#dcfce7;color:#16a34a">On Track</span>
+          <span class="updated-chip">Updated Mar 27, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Christopher Miller</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Rahul Bhanushali</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Sonal M</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Prakhar Joshi</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>Breakout account — $260K add-on signed, 2 UCs live with strong adoption, 13 new UCs in pipeline. Q2 target: 20–30 UCs. ServiceNow VP evaluation is the key near-term risk.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">Sales Call Plan Analysis</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Live since Feb 26. 30+ users logged in Day 1. Positive feedback from Business Partners.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#dcfce7;color:#16a34a">Live</span><span class="uc-name">Account Research (AI Prospecting)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Live since Mar 5. Day 1: 49 unique users, 106 accounts researched, 5 opportunities saved. Embedded in Salesforce.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">Email-to-Order (E2O)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Genesys connector replaced with direct Outlook integration. Tech doc for edge cases by Monday.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">ServiceNow ITSM Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">VP of ServiceNow evaluating UA vs Moveworks. Needs demo of catalog items urgently.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">Next 13 Use Cases</span></div>
+      <div class="rl"><div class="rs active"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">$260K add-on order form signed Mar 24. Shaw wants 20-30 UCs done by end of Q2.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">2</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">ServiceNow VP evaluating Moveworks as alternative — needs catalog item demo ASAP<span class="item-owner">Christopher Miller / Tanmoy Haldar</span></div></div><div class="list-item"><div class="item-desc">Genesys integration limitation for E2O — workaround approach via Outlook needs validation<span class="item-owner">Vaibhav Dhalla</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">2</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">ServiceNow catalog item demo needed for VP to continue commitment<span class="item-owner">Tanmoy Haldar / Kyle Ogle</span></div></div><div class="list-item"><div class="item-desc">Genesys tech doc (edge case handling) — needed by Monday<span class="item-owner">Vaibhav Dhalla</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">5</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">MAJOR: $260K/yr add-on order form signed for Shaw's next 13 use cases (Mar 24)</div></div><div class="list-item"><div class="item-desc">Account Research live — 49 unique users, 106 accounts researched on Day 1</div></div><div class="list-item"><div class="item-desc">Sales Call Plan Analysis live — 30+ users, positive feedback</div></div><div class="list-item"><div class="item-desc">Shaw internally adopted UA use case template for business team submissions</div></div><div class="list-item"><div class="item-desc">Shaw technical pods aligned with UA pods for faster delivery</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">ServiceNow catalog item demo for VP<span class="item-owner">Tanmoy Haldar</span></div><span class="item-eta">Urgent</span></div><div class="list-item"><div class="item-desc">Next 7 UCs order form processing<span class="item-owner">Christopher Miller</span></div><span class="item-eta">This week</span></div><div class="list-item"><div class="item-desc">20-30 UCs delivered by end of Q2<span class="item-owner">Sonal Menon / Santosh Singh</span></div><span class="item-eta">June 2026</span></div><div class="list-item"><div class="item-desc">FDE scale-up model proposal<span class="item-owner">Colin Callahan / Rohan Vijay</span></div><span class="item-eta">TBD</span></div></div>
+    </div></div>
+  </div>
+</div><div class="tab-content" id="tab-12" style="display:none">
+  <div class="account-header">
+    <div class="account-header-left">
+      <div class="account-dot" style="background:#f59e0b"></div>
+      <div>
+        <h2 class="account-title">Stowers</h2>
+        <div class="account-meta">
+          <span class="arr-chip">$50K ARR</span>
+          <span class="health-badge" style="background:#fef9c3;color:#ca8a04">Needs Attention</span>
+          <span class="updated-chip">Updated Mar 31, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="team-strip"><div class="team-item"><span class="team-role">Sales POC</span><span class="team-name">Taymour Bassiri</span></div><div class="team-item"><span class="team-role">Program Lead</span><span class="team-name">Rahul Bhanushali</span></div><div class="team-item"><span class="team-role">Project Manager</span><span class="team-name">Raghav K</span></div><div class="team-item"><span class="team-role">Product Lead</span><span class="team-name">Kanala V</span></div></div>
+  <div class="exec-summary"><div class="exec-summary-label">Executive Summary</div><p>UC01 soft go-live to IT dept on Apr 1. A 503 first-query error and limited initial rollout scope are creating confidence risks. UC02/03 targeting mid-May go-live.</p></div>
+  <div class="section-header">Use Cases</div>
+  <div class="uc-list"><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC01: Research Assistant Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Build</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Soft launch to IT department on Apr 1. First-query 503 error noted (not a go-live blocker but reducing confidence). Spike load testing completed.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC02: Enterprise Search Agent</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">On-prem architecture document shared. RBAC and security discussions ongoing. Windows server details and LDAP credentials pending from Stowers.</p>
+    </div><div class="uc-card">
+      <div class="uc-header"><span class="status-badge" style="background:#eff6ff;color:#2563eb">In Progress</span><span class="uc-name">UC03: Email Assistant (Outlook)</span></div>
+      <div class="rl"><div class="rs done"><span class="rd"></span><span class="rn">Sales Handover</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">Discovery</span></div><div class="rc done"></div><div class="rs done"><span class="rd"></span><span class="rn">BRD Sign-off</span></div><div class="rc done"></div><div class="rs active"><span class="rd"></span><span class="rn">Build</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Show &amp; Tell</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">UAT</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Go-live</span></div><div class="rc future"></div><div class="rs future"><span class="rd"></span><span class="rn">Hypercare</span></div></div>
+      <p class="uc-notes">Discovery and design complete. Development in progress. Authorization approach (Service Account vs OAuth) under evaluation.</p>
+    </div></div>
+  <div class="two-col">
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">⚠</span>Risks<span class="section-count" style="background:#ef444422;color:#ef4444">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">First-query 503 error on UC01 reducing client confidence even though not a go-live blocker<span class="item-owner">Tushar Gupta</span></div></div><div class="list-item"><div class="item-desc">Low initial adoption expected — only IT dept in first phase<span class="item-owner">Raghav Kakkar</span></div></div><div class="list-item"><div class="item-desc">CIO support needed to accelerate UAT engagement and go-live commitment<span class="item-owner">Sandeep Sharma / Gautam Anand</span></div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">🚧</span>Blockers<span class="section-count" style="background:#f59e0b22;color:#f59e0b">3</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">Windows server details and LDAP user credentials pending from Stowers (UC02)<span class="item-owner">Stowers</span></div></div><div class="list-item"><div class="item-desc">Authorization method confirmation pending from Stowers (UC03 Email Assistant)<span class="item-owner">Stowers</span></div></div><div class="list-item"><div class="item-desc">503 first-query error: root cause under investigation<span class="item-owner">Tushar Gupta</span></div></div></div>
+    </div></div>
+    <div class="col"><div class="section-card">
+      <div class="section-title"><span class="section-icon">🏆</span>Achievements<span class="section-count" style="background:#22c55e22;color:#22c55e">5</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">All 3 BRDs signed off by Sam (Mar 17)</div></div><div class="list-item"><div class="item-desc">UC01 soft go-live confirmed for Apr 1 to IT department</div></div><div class="list-item"><div class="item-desc">Spike load testing completed and results shared</div></div><div class="list-item"><div class="item-desc">408 timeout issue resolved (Cohere V4 embedding model — retry limit set to 3)</div></div><div class="list-item"><div class="item-desc">200+ Q&amp;A dataset with confidence metrics shared for validation</div></div></div>
+    </div><div class="section-card">
+      <div class="section-title"><span class="section-icon">📅</span>Milestones<span class="section-count" style="background:#3b82f622;color:#3b82f6">4</span></div>
+      <div class="section-list"><div class="list-item"><div class="item-desc">UC01 soft go-live — IT department rollout<span class="item-owner">Raghav Kakkar / Tushar Gupta</span></div><span class="item-eta">Apr 1</span></div><div class="list-item"><div class="item-desc">Broader UC01 announcement (post stability confirmation)<span class="item-owner">Rahul Bhanushali</span></div><span class="item-eta">Week of Apr 6</span></div><div class="list-item"><div class="item-desc">UC02 &amp; UC03 go-live targets<span class="item-owner">Raghav Kakkar</span></div><span class="item-eta">Mid-May 2026</span></div><div class="list-item"><div class="item-desc">CIO engagement to accelerate UAT and adoption<span class="item-owner">Gautam Anand / Colin Callahan</span></div><span class="item-eta">This week</span></div></div>
+    </div></div>
+  </div>
+</div>
+  </main>
+</div>
+<script>
+function showTab(idx) {
+  document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + idx).style.display = 'block';
+  document.getElementById('tabitem-' + idx).classList.add('active');
+  document.querySelector('.main').scrollTop = 0;
+}
+</script>
+
+</body></html>
