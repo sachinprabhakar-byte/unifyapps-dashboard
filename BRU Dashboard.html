@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)file:///Users/home/Desktop/UAT%20Check/BRU_QA_Dashboard.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BRU — QA Coverage Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background: linear-gradient(135deg, #1B365D 0%, #0f1f3d 100%);
+            color: white;
+            padding: 24px 0;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        }
+
+        .sidebar-logo {
+            padding: 0 24px 32px;
+            font-size: 18px;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 24px;
+        }
+
+        .nav-item {
+            padding: 12px 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            user-select: none;
+        }
+
+        .nav-item:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-item.active {
+            background: rgba(0,120,212,0.2);
+            border-left-color: #0078D4;
+            font-weight: 600;
+        }
+
+        /* MAIN CONTENT */
+        .main {
+            margin-left: 280px;
+            flex: 1;
+            padding: 40px;
+            background: white;
+        }
+
+        /* TABS & SECTIONS */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HEADER */
+        .page-header {
+            margin-bottom: 32px;
+        }
+
+        .page-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1B365D;
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: #666;
+        }
+
+        /* EXPLAINER BANNER */
+        .explainer-banner {
+            background: #f0f4ff;
+            border-left: 4px solid #0078D4;
+            padding: 16px 20px;
+            margin-bottom: 32px;
+            border-radius: 4px;
+            line-height: 1.6;
+        }
+
+        .explainer-banner strong {
+            display: block;
+            margin-bottom: 8px;
+            color: #1B365D;
+        }
+
+        /* SUMMARY CARDS */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border-color: #0078D4;
+        }
+
+        .card-value {
+            font-size: 32px;
+            font-weight: 700;
+            color: #1B365D;
+            margin: 10px 0;
+        }
+
+        .card-label {
+            font-size: 13px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-subtext {
+            font-size: 14px;
+            color: #999;
+            margin-top: 8px;
+        }
+
+        /* COVERAGE INDICATORS */
+        .coverage-full { color: #107C10; }
+        .coverage-partial { color: #FFB900; }
+        .coverage-none { color: #E81123; }
+
+        /* SECTION HEADERS */
+        .section-header {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1B365D;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #0078D4;
+        }
+
+        /* AREA COVERAGE TABLE */
+        .coverage-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+            table-layout: fixed;
+        }
+
+        .coverage-table thead th {
+            padding: 8px 8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #1B365D;
+            font-weight: 600;
+            border-bottom: 2px solid #e0e0e0;
+            background: #f5f5f5;
+            text-align: center;
+        }
+
+        .coverage-table tbody td {
+            padding: 5px 8px;
+            font-size: 13px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .coverage-table tbody tr:hover {
+            background: #fafafa;
+        }
+
+        .coverage-table .area-name-cell {
+            font-weight: 500;
+            color: #333;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .coverage-table .num-cell {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .coverage-table .bar-cell {
+            padding: 5px 8px;
+        }
+
+        .mini-bar {
+            display: flex;
+            height: 8px;
+            border-radius: 4px;
+            overflow: hidden;
+            background: #f0f0f0;
+        }
+
+        .mini-bar .seg-full { background: #107C10; }
+        .mini-bar .seg-partial { background: #FFB900; }
+        .mini-bar .seg-none { background: #E81123; }
+
+        .bar-legend {
+            display: flex;
+            gap: 20px;
+            font-size: 12px;
+            margin-top: 8px;
+            color: #666;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-box {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+
+        /* TABLES */
+        .table-wrapper {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 40px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #f5f5f5;
+        }
+
+        th {
+            padding: 14px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 13px;
+            color: #1B365D;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        td {
+            padding: 14px 16px;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
+        tbody tr:hover {
+            background: #fafafa;
+        }
+
+        tbody tr.correct-row {
+            background-color: #e6f5e6;
+        }
+
+        tbody tr.misclassified-row {
+            background-color: #ffe6e6;
+        }
+
+        /* EXPANDABLE */
+        .expand-btn {
+            background: none;
+            border: none;
+            color: #0078D4;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            padding: 0;
+            text-decoration: underline;
+        }
+
+        .expand-btn:hover {
+            color: #106ebe;
+        }
+
+        .expandable-row {
+            display: none;
+            background: #f9f9f9;
+        }
+
+        .expandable-row.expanded {
+            display: table-row;
+        }
+
+        /* FILTERS */
+        .filters {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .filter-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1B365D;
+            text-transform: uppercase;
+        }
+
+        select {
+            padding: 8px 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        select:hover {
+            border-color: #0078D4;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: #0078D4;
+            box-shadow: 0 0 0 2px rgba(0,120,212,0.1);
+        }
+
+        /* SUMMARY TABLE */
+        .summary-table td {
+            text-align: center;
+        }
+
+        .summary-table td:first-child {
+            text-align: left;
+        }
+
+        .uc-name {
+            font-weight: 600;
+            color: #1B365D;
+        }
+
+        /* SEARCH */
+        .search-box {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d0d0d0;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #0078D4;
+            box-shadow: 0 0 0 2px rgba(0,120,212,0.1);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+            }
+            .main {
+                margin-left: 240px;
+                padding: 24px;
+            }
+            .cards-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                height: auto;
+                padding: 16px;
+            }
+            .main {
+                margin-left: 0;
+            }
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .page-title {
+                font-size: 20px;
+            }
+            .chart-item {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <div class="sidebar-logo">BRU QA Dashboard</div>
+            <div class="nav-item active" onclick="switchTab(&#39;overview&#39;)">Overview</div>
+            <div class="nav-item" onclick="switchTab(&#39;uc01&#39;)">UC01: Contracts SPC</div>
+            <div class="nav-item" onclick="switchTab(&#39;uc02&#39;)">UC02: Account Recon</div>
+        </div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main">
+            <!-- OVERVIEW TAB -->
+            <div id="overview" class="tab-content active">
+                <div class="page-header">
+                    <h1 class="page-title">BRU — QA Coverage Dashboard</h1>
+                    <p class="page-subtitle">Comparing QA team test sheets against BRD requirements across all use cases</p>
+                </div>
+
+                <div class="explainer-banner">
+                    <strong>How to read this report:</strong>
+                    <p style="margin:8px 0 12px 0;">This dashboard compares the BRD-derived test scenarios (from Business Requirements Documents) against your QA team's test sheet.</p>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        <div><strong style="color:#107C10;">■ Green (In QA Sheet)</strong> — Your QA team already has a test case that fully covers this scenario.</div>
+                        <div><strong style="color:#FFB900;">■ Yellow (Partially Covered)</strong> — The QA sheet touches this area but doesn't test this specific scenario.</div>
+                        <div><strong style="color:#E81123;">■ Red (Not in QA Sheet)</strong> — No matching test case found. This is a gap to address.</div>
+                    </div>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-label">Total BRD Scenarios</div>
+                        <div class="card-value">195</div>
+                        <div class="card-subtext">75 UC01 + 120 UC02</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">In QA Sheet</div>
+                        <div class="card-value coverage-full">95</div>
+                        <div class="card-subtext">20 UC01 + 75 UC02</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Partially Covered</div>
+                        <div class="card-value coverage-partial">49</div>
+                        <div class="card-subtext">40 UC01 + 9 UC02</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Not in QA Sheet</div>
+                        <div class="card-value coverage-none">51</div>
+                        <div class="card-subtext">15 UC01 + 36 UC02</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">QA Sheet Coverage %</div>
+                        <div class="card-value" style="color: #0078D4;">73.8%</div>
+                        <div class="card-subtext">Account-level average</div>
+                    </div>
+                </div>
+
+                <div class="section-header">Per-Use-Case Summary</div>
+                <div class="table-wrapper">
+                    <table class="summary-table">
+                        <thead>
+                            <tr>
+                                <th>Use Case</th>
+                                <th>BRD Scenarios</th>
+                                <th>In QA Sheet</th>
+                                <th>Partially Covered</th>
+                                <th>Not in QA Sheet</th>
+                                <th>QA Sheet Coverage %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong class="uc-name">UC01: Contracts SPC</strong></td>
+                                <td>75</td>
+                                <td><span class="coverage-full">20</span></td>
+                                <td><span class="coverage-partial">40</span></td>
+                                <td><span class="coverage-none">15</span></td>
+                                <td><strong>80.0%</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong class="uc-name">UC02: Account Recon Automation</strong></td>
+                                <td>120</td>
+                                <td><span class="coverage-full">75</span></td>
+                                <td><span class="coverage-partial">9</span></td>
+                                <td><span class="coverage-none">36</span></td>
+                                <td><strong class="coverage-full">70.0%</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section-header">UAT 'New Ask' Classification Audit</div>
+                <p style="margin-bottom: 16px; color: #666; font-size: 15px;">Checking if items classified as 'New Ask' in the Issue Type column are correctly categorized or should be 'Bug'</p>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-label">Total 'New Ask' Items Audited</div>
+                        <div class="card-value">18</div>
+                        <div class="card-subtext">14 UC01 + 4 UC02</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Correctly Classified</div>
+                        <div class="card-value coverage-full">10</div>
+                        <div class="card-subtext">7 UC01 + 3 UC02</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Should Be 'Bug'</div>
+                        <div class="card-value coverage-none">8</div>
+                        <div class="card-subtext">7 UC01 + 1 UC02</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Accuracy</div>
+                        <div class="card-value" style="color: #FFB900;">55.6%</div>
+                        <div class="card-subtext">Account-level average</div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 40px;">
+                    <h3 style="font-size: 16px; font-weight: 600; color: #1B365D; margin-bottom: 16px;">Misclassified Items (Should Be 'Bug')</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Issue ID</th>
+                                    <th>Use Case</th>
+                                    <th>Feedback</th>
+                                    <th>Current Type</th>
+                                    <th>Should Be</th>
+                                    <th>Reasoning</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="misclassified-row">
+                                    <td><strong>BU_UC01-5</strong></td>
+                                    <td>UC01</td>
+                                    <td>Dual handling for End date / Proposed end date. Independent Contractor attachment check.</td>
+                                    <td>New Ask</td>
+                                    <td><strong>Bug</strong></td>
+                                    <td>BRD already specifies date validation and attachment checks as part of RPA data validation. The system is handling these incorrectly — that's a bug in existing validation logic, not a new feature request.</td>
+                                </tr>
+                                <tr class="misclassified-row">
+                                    <td><strong>BU_UC01-6</strong></td>
+                                    <td>UC01</td>
+                                    <td>Make main document template selection mandatory when available and follow correct sequence (record template then main document).</td>
+                                    <td>New Ask</td>
+                                    <td><strong>Bug</strong></td>
+                                    <td>BRD Phase 2 explicitly includes 'Template selection and document generation' as a step. Enforcing the correct sequence and making it mandatory is fixing incorrect implementation of an existing BRD requirement, not adding new functionality.</td>
+                                </tr>
+                                <tr class="misclassified-row">
+                                    <td><strong>BU_UC01-8</strong></td>
+                                    <td>UC01</td>
+                                    <td>Status shows 'Under Review for Contract Type' when request is approved and contract created. Should show as completed, not requiring action.</td>
+                                    <td>New Ask</td>
+                                    <td><strong>Bug</strong></td>
+                                    <td>The system is displaying a misleading status — showing 'Under Review' when the contract is actually completed. This is incorrect status tracking behavior. The BRD covers contract status updates throughout all 3 phases. Showing wrong status is a defect.</td>
+                                </tr>
+                                <tr class="misclassified-row">
+                                    <td><strong>BU_UC01-12</strong></td>
+                                    <td>UC01</td>
+                                    <td>On browser refresh - the same tab needs to be opened in UC01 UI.</td>
+                                    <td>New Ask</td>
+                                    <td><strong>Bug</strong></td>
+                                    <td>Preserving tab state on browser refresh is standard expected UX behavior. Losing the user's position on refresh is a defect in the application, not a new feature request.</td>
+                                </tr>
+                                <tr class="misclassified-row">
+                                    <td><strong>BU_UC01-19</strong></td>
+                                    <td>UC01</td>
+                                    <td>If the Contract Type is a match, there is no need to put anything in the discussion section of the request.</td>
+                                    <td>New Ask</td>
+                                    <td><strong>Bug</strong></td>
+                                    <td>The BRD specifies that validation results are posted to the discussion section and 'AI suggestions will be given to showcase data validation details.' Posting unnecessary content when there are no issues is a logic defect in the existing validation output — the system should only flag problems, not confirmations.</td>
+                                </tr>
+                                <tr class="misclassified-row">
+                                    <td><strong>BU_UC01-20</strong></td>
+                                    <td>UC01</td>
+                                    <td>Please only list issues in the discussion section. There's no need to list successful items, just to keep things shorter.</td>
+                                    <td>New Ask</td>
+                                    <td><strong>Bug</strong></td>
+                                    <td>Same as BU_UC01-19. The BRD says the RPA should 'Inform the Contract Manager about the results based on schema field.' Listing successful validations alongside failures clutters the output and defeats the purpose. This is a defect in the validation output logic.</td>
+                                </tr>
+                                <tr class="misclassified-row">
+                                    <td><strong>BU_UC01-24</strong></td>
+                                    <td>UC01</td>
+                                    <td>Request 1282312 - Flagged for no attachments, but there were 2 Word Documents attached.</td>
+                                    <td>New Ask</td>
+                                    <td><strong>Bug</strong></td>
+                                    <td>The system incorrectly flags a request as having no attachments when it clearly has 2 Word Documents. This is a validation logic error — the attachment detection is broken. This is unambiguously a Bug, not a New Ask.</td>
+                                </tr>
+                                <tr class="misclassified-row">
+                                    <td><strong>BU_UC02-18</strong></td>
+                                    <td>UC02</td>
+                                    <td>Add discrepancy tab in the recon run dashboard.</td>
+                                    <td>New Ask</td>
+                                    <td><strong>Bug</strong></td>
+                                    <td>The BRD explicitly requires discrepancy identification and documentation (Step 7D: 'Calculate variance amounts', Step 11: 'Review and research any unexplained variances'). The Error Handling &amp; Monitoring Framework (Section 8) further mandates discrepancy surfacing. Without a discrepancy tab, the system fails to meet these BRD requirements.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- UC01 TAB -->
+            <div id="uc01" class="tab-content">
+                <div class="page-header">
+                    <h1 class="page-title">UC01: Contracts SPC</h1>
+                    <p class="page-subtitle">Detailed test case coverage and audit breakdown</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-label">Total BRD Scenarios</div>
+                        <div class="card-value">75</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">In QA Sheet</div>
+                        <div class="card-value coverage-full">20</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Partially Covered</div>
+                        <div class="card-value coverage-partial">40</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Not in QA Sheet</div>
+                        <div class="card-value coverage-none">15</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">QA Sheet Coverage %</div>
+                        <div class="card-value" style="color: #0078D4;">80.0%</div>
+                    </div>
+                </div>
+
+                <div class="section-header">Area Coverage Summary</div>
+                <div class="chart-grid" id="uc01-areas"><div class="table-wrapper"><table class="coverage-table">
+                <colgroup>
+                    <col style="width:38%">
+                    <col style="width:8%">
+                    <col style="width:8%">
+                    <col style="width:10%">
+                    <col style="width:28%">
+                    <col style="width:8%">
+                </colgroup>
+                <thead><tr>
+                    <th style="text-align:left;">Functional Area</th>
+                    <th>In QA</th>
+                    <th>Partial</th>
+                    <th>Not in QA</th>
+                    <th>Coverage</th>
+                    <th>Total</th>
+                </tr></thead>
+                <tbody><tr>
+                    <td class="area-name-cell">Email Trigger &amp; Ingestion</td>
+                    <td class="num-cell" style="color:#107C10;">4</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:100%"></div>
+                        
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">4</td>
+                </tr><tr>
+                    <td class="area-name-cell">Data Validation - Field Level</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">9</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        <div class="seg-partial" style="width:100%"></div>
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">9</td>
+                </tr><tr>
+                    <td class="area-name-cell">Contract Manager Workflow</td>
+                    <td class="num-cell" style="color:#107C10;">5</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:100%"></div>
+                        
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">5</td>
+                </tr><tr>
+                    <td class="area-name-cell">Template Selection</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">5</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        <div class="seg-partial" style="width:100%"></div>
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">5</td>
+                </tr><tr>
+                    <td class="area-name-cell">E-Signature / DocuSign</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">7</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        <div class="seg-partial" style="width:100%"></div>
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">7</td>
+                </tr><tr>
+                    <td class="area-name-cell">Data Validation - Business Rules</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">5</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        <div class="seg-partial" style="width:100%"></div>
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">5</td>
+                </tr><tr>
+                    <td class="area-name-cell">Data Validation - Reference Data</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">4</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        <div class="seg-partial" style="width:100%"></div>
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">4</td>
+                </tr><tr>
+                    <td class="area-name-cell">Error Handling</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">5</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        
+                        <div class="seg-none" style="width:100%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">5</td>
+                </tr><tr>
+                    <td class="area-name-cell">Discussion Section Posting</td>
+                    <td class="num-cell" style="color:#107C10;">3</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:100%"></div>
+                        
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">3</td>
+                </tr><tr>
+                    <td class="area-name-cell">Status Tracking</td>
+                    <td class="num-cell" style="color:#107C10;">2</td>
+                    <td class="num-cell" style="color:#C08C00;">2</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:50%"></div>
+                        <div class="seg-partial" style="width:50%"></div>
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">4</td>
+                </tr><tr>
+                    <td class="area-name-cell">Notification Engine</td>
+                    <td class="num-cell" style="color:#107C10;">1</td>
+                    <td class="num-cell" style="color:#C08C00;">3</td>
+                    <td class="num-cell" style="color:#E81123;">1</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:20%"></div>
+                        <div class="seg-partial" style="width:60%"></div>
+                        <div class="seg-none" style="width:20%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">5</td>
+                </tr><tr>
+                    <td class="area-name-cell">UX / Interface Behavior</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">4</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        
+                        <div class="seg-none" style="width:100%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">4</td>
+                </tr><tr>
+                    <td class="area-name-cell">Audit &amp; Compliance</td>
+                    <td class="num-cell" style="color:#107C10;">1</td>
+                    <td class="num-cell" style="color:#C08C00;">3</td>
+                    <td class="num-cell" style="color:#E81123;">1</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:20%"></div>
+                        <div class="seg-partial" style="width:60%"></div>
+                        <div class="seg-none" style="width:20%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">5</td>
+                </tr><tr>
+                    <td class="area-name-cell">Integration Points</td>
+                    <td class="num-cell" style="color:#107C10;">4</td>
+                    <td class="num-cell" style="color:#C08C00;">2</td>
+                    <td class="num-cell" style="color:#E81123;">4</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:40%"></div>
+                        <div class="seg-partial" style="width:20%"></div>
+                        <div class="seg-none" style="width:40%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">10</td>
+                </tr></tbody>
+            </table></div>
+            <div class="bar-legend">
+                <div class="legend-item"><div class="legend-box" style="background:#107C10;"></div> In QA Sheet</div>
+                <div class="legend-item"><div class="legend-box" style="background:#FFB900;"></div> Partially Covered</div>
+                <div class="legend-item"><div class="legend-box" style="background:#E81123;"></div> Not in QA Sheet</div>
+            </div></div>
+
+                <div class="section-header">Full UAT Audit Table — All 14 'New Ask' Items</div>
+                <p style="margin-bottom: 16px; color: #666; font-size: 15px;">Complete classification audit showing which items are correctly categorized and which should be reclassified</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Issue ID</th>
+                                <th>Feedback</th>
+                                <th>Current Issue Type</th>
+                                <th>Recommended</th>
+                                <th>Correct?</th>
+                                <th>Reasoning</th>
+                            </tr>
+                        </thead>
+                        <tbody id="uc01-audit-body"><tr class="misclassified-row">
+                    <td><strong>BU_UC01-5</strong></td>
+                    <td>Dual handling for End date / Proposed end date. Independent Contractor attachment check.</td>
+                    <td>New Ask</td>
+                    <td><strong>Bug</strong></td>
+                    <td style="color:#E81123; font-weight:600;">✗ Misclassified</td>
+                    <td>BRD already specifies date validation and attachment checks as part of RPA data validation. The system is handling these incorrectly — that's a bug in existing validation logic, not a new feature request.</td>
+                </tr><tr class="misclassified-row">
+                    <td><strong>BU_UC01-6</strong></td>
+                    <td>Make main document template selection mandatory when available and follow correct sequence (record template then main document).</td>
+                    <td>New Ask</td>
+                    <td><strong>Bug</strong></td>
+                    <td style="color:#E81123; font-weight:600;">✗ Misclassified</td>
+                    <td>BRD Phase 2 explicitly includes 'Template selection and document generation' as a step. Enforcing the correct sequence and making it mandatory is fixing incorrect implementation of an existing BRD requirement.</td>
+                </tr><tr class="misclassified-row">
+                    <td><strong>BU_UC01-8</strong></td>
+                    <td>Status shows 'Under Review for Contract Type' when request is approved and contract created. Should show as completed.</td>
+                    <td>New Ask</td>
+                    <td><strong>Bug</strong></td>
+                    <td style="color:#E81123; font-weight:600;">✗ Misclassified</td>
+                    <td>The system is displaying a misleading status. The BRD covers contract status updates throughout all 3 phases. Showing wrong status is a defect.</td>
+                </tr><tr class="correct-row">
+                    <td><strong>BU_UC01-11</strong></td>
+                    <td>Slack notification for RPA errors not always arriving within 5 minutes.</td>
+                    <td>New Ask</td>
+                    <td><strong>New Ask</strong></td>
+                    <td style="color:#107C10; font-weight:600;">✓ Correct</td>
+                    <td>BRD mentions Slack notifications but doesn't specify a 5-minute SLA. Requesting a specific SLA is a legitimate new feature request.</td>
+                </tr><tr class="misclassified-row">
+                    <td><strong>BU_UC01-12</strong></td>
+                    <td>On browser refresh - the same tab needs to be opened in UC01 UI.</td>
+                    <td>New Ask</td>
+                    <td><strong>Bug</strong></td>
+                    <td style="color:#E81123; font-weight:600;">✗ Misclassified</td>
+                    <td>Preserving tab state on browser refresh is standard expected UX behavior. Losing the user's position on refresh is a defect in the application.</td>
+                </tr><tr class="correct-row">
+                    <td><strong>BU_UC01-13</strong></td>
+                    <td>Print functionality needed for contract summary page.</td>
+                    <td>New Ask</td>
+                    <td><strong>New Ask</strong></td>
+                    <td style="color:#107C10; font-weight:600;">✓ Correct</td>
+                    <td>BRD does not mention print functionality. This is a legitimate new feature request for enhanced usability.</td>
+                </tr><tr class="correct-row">
+                    <td><strong>BU_UC01-14</strong></td>
+                    <td>Would like batch processing for multiple contracts at once.</td>
+                    <td>New Ask</td>
+                    <td><strong>New Ask</strong></td>
+                    <td style="color:#107C10; font-weight:600;">✓ Correct</td>
+                    <td>BRD describes single-contract processing. Batch processing is a new capability request beyond original scope.</td>
+                </tr><tr class="correct-row">
+                    <td><strong>BU_UC01-15</strong></td>
+                    <td>Department name display alongside department code in contract list.</td>
+                    <td>New Ask</td>
+                    <td><strong>New Ask</strong></td>
+                    <td style="color:#107C10; font-weight:600;">✓ Correct</td>
+                    <td>BRD uses department codes. Displaying department names is an enhancement for readability, not a required feature.</td>
+                </tr><tr class="correct-row">
+                    <td><strong>BU_UC01-16</strong></td>
+                    <td>Allow CMs to set custom reminder schedules for pending contracts.</td>
+                    <td>New Ask</td>
+                    <td><strong>New Ask</strong></td>
+                    <td style="color:#107C10; font-weight:600;">✓ Correct</td>
+                    <td>BRD does not mention custom reminder functionality. This is a legitimate new feature request.</td>
+                </tr><tr class="correct-row">
+                    <td><strong>BU_UC01-17</strong></td>
+                    <td>Contract list sorting by multiple columns simultaneously.</td>
+                    <td>New Ask</td>
+                    <td><strong>New Ask</strong></td>
+                    <td style="color:#107C10; font-weight:600;">✓ Correct</td>
+                    <td>BRD does not specify multi-column sorting. This is a usability enhancement request.</td>
+                </tr><tr class="correct-row">
+                    <td><strong>BU_UC01-18</strong></td>
+                    <td>Dashboard for CM workload overview across all active contracts.</td>
+                    <td>New Ask</td>
+                    <td><strong>New Ask</strong></td>
+                    <td style="color:#107C10; font-weight:600;">✓ Correct</td>
+                    <td>BRD does not include a workload dashboard. This is a legitimate new feature request for better oversight.</td>
+                </tr><tr class="misclassified-row">
+                    <td><strong>BU_UC01-19</strong></td>
+                    <td>If the Contract Type is a match, there is no need to put anything in the discussion section of the request.</td>
+                    <td>New Ask</td>
+                    <td><strong>Bug</strong></td>
+                    <td style="color:#E81123; font-weight:600;">✗ Misclassified</td>
+                    <td>BRD specifies validation results posted to discussion section. Posting unnecessary content when there are no issues is a logic defect — the system should only flag problems, not confirmations.</td>
+                </tr><tr class="misclassified-row">
+                    <td><strong>BU_UC01-20</strong></td>
+                    <td>Please only list issues in the discussion section. No need to list successful items.</td>
+                    <td>New Ask</td>
+                    <td><strong>Bug</strong></td>
+                    <td style="color:#E81123; font-weight:600;">✗ Misclassified</td>
+                    <td>Same as BU_UC01-19. The BRD says the RPA should 'Inform the Contract Manager about the results.' Listing successful validations alongside failures clutters the output.</td>
+                </tr><tr class="misclassified-row">
+                    <td><strong>BU_UC01-24</strong></td>
+                    <td>Request 1282312 - Flagged for no attachments, but there were 2 Word Documents attached.</td>
+                    <td>New Ask</td>
+                    <td><strong>Bug</strong></td>
+                    <td style="color:#E81123; font-weight:600;">✗ Misclassified</td>
+                    <td>The system incorrectly flags a request as having no attachments when it clearly has 2 Word Documents. This is a validation logic error — the attachment detection is broken.</td>
+                </tr></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- UC02 TAB -->
+            <div id="uc02" class="tab-content">
+                <div class="page-header">
+                    <h1 class="page-title">UC02: Account Recon Automation</h1>
+                    <p class="page-subtitle">Detailed test case coverage and audit breakdown</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-label">Total BRD Scenarios</div>
+                        <div class="card-value">120</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">In QA Sheet</div>
+                        <div class="card-value coverage-full">75</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Partially Covered</div>
+                        <div class="card-value coverage-partial">9</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">Not in QA Sheet</div>
+                        <div class="card-value coverage-none">36</div>
+                    </div>
+                    <div class="card">
+                        <div class="card-label">QA Sheet Coverage %</div>
+                        <div class="card-value" style="color: #0078D4;">70.0%</div>
+                    </div>
+                </div>
+
+                <div class="section-header">Area Coverage Summary</div>
+                <div class="chart-grid" id="uc02-areas"><div class="table-wrapper"><table class="coverage-table">
+                <colgroup>
+                    <col style="width:38%">
+                    <col style="width:8%">
+                    <col style="width:8%">
+                    <col style="width:10%">
+                    <col style="width:28%">
+                    <col style="width:8%">
+                </colgroup>
+                <thead><tr>
+                    <th style="text-align:left;">Functional Area</th>
+                    <th>In QA</th>
+                    <th>Partial</th>
+                    <th>Not in QA</th>
+                    <th>Coverage</th>
+                    <th>Total</th>
+                </tr></thead>
+                <tbody><tr>
+                    <td class="area-name-cell">RECON Home Page &amp; Navigation</td>
+                    <td class="num-cell" style="color:#107C10;">6</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">2</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:75%"></div>
+                        
+                        <div class="seg-none" style="width:25%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">8</td>
+                </tr><tr>
+                    <td class="area-name-cell">Create New Reconciliation</td>
+                    <td class="num-cell" style="color:#107C10;">8</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:100%"></div>
+                        
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">8</td>
+                </tr><tr>
+                    <td class="area-name-cell">Source File Upload</td>
+                    <td class="num-cell" style="color:#107C10;">7</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">3</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:70%"></div>
+                        
+                        <div class="seg-none" style="width:30%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">10</td>
+                </tr><tr>
+                    <td class="area-name-cell">View &amp; Manage Reconciliation Data</td>
+                    <td class="num-cell" style="color:#107C10;">2</td>
+                    <td class="num-cell" style="color:#C08C00;">1</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:67%"></div>
+                        <div class="seg-partial" style="width:33%"></div>
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">3</td>
+                </tr><tr>
+                    <td class="area-name-cell">Audience View Details Tab</td>
+                    <td class="num-cell" style="color:#107C10;">7</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:100%"></div>
+                        
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">7</td>
+                </tr><tr>
+                    <td class="area-name-cell">Previous Month AV Details Tab</td>
+                    <td class="num-cell" style="color:#107C10;">3</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:100%"></div>
+                        
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">3</td>
+                </tr><tr>
+                    <td class="area-name-cell">Ledger File Tab</td>
+                    <td class="num-cell" style="color:#107C10;">3</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:100%"></div>
+                        
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">3</td>
+                </tr><tr>
+                    <td class="area-name-cell">Ledger Summary Tab</td>
+                    <td class="num-cell" style="color:#107C10;">3</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:100%"></div>
+                        
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">3</td>
+                </tr><tr>
+                    <td class="area-name-cell">TouchNet Recon Tabs</td>
+                    <td class="num-cell" style="color:#107C10;">6</td>
+                    <td class="num-cell" style="color:#C08C00;">2</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:75%"></div>
+                        <div class="seg-partial" style="width:25%"></div>
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">8</td>
+                </tr><tr>
+                    <td class="area-name-cell">Export &amp; Notifications</td>
+                    <td class="num-cell" style="color:#107C10;">3</td>
+                    <td class="num-cell" style="color:#C08C00;">2</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:60%"></div>
+                        <div class="seg-partial" style="width:40%"></div>
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">5</td>
+                </tr><tr>
+                    <td class="area-name-cell">Payment Type Summary</td>
+                    <td class="num-cell" style="color:#107C10;">12</td>
+                    <td class="num-cell" style="color:#C08C00;">1</td>
+                    <td class="num-cell" style="color:#E81123;">1</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:86%"></div>
+                        <div class="seg-partial" style="width:7%"></div>
+                        <div class="seg-none" style="width:7%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">14</td>
+                </tr><tr>
+                    <td class="area-name-cell">Cash Receipts</td>
+                    <td class="num-cell" style="color:#107C10;">3</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">2</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:60%"></div>
+                        
+                        <div class="seg-none" style="width:40%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">5</td>
+                </tr><tr>
+                    <td class="area-name-cell">Ending Balance</td>
+                    <td class="num-cell" style="color:#107C10;">4</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">2</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:67%"></div>
+                        
+                        <div class="seg-none" style="width:33%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">6</td>
+                </tr><tr>
+                    <td class="area-name-cell">Carry Forward</td>
+                    <td class="num-cell" style="color:#107C10;">2</td>
+                    <td class="num-cell" style="color:#C08C00;">1</td>
+                    <td class="num-cell" style="color:#E81123;">4</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:29%"></div>
+                        <div class="seg-partial" style="width:14%"></div>
+                        <div class="seg-none" style="width:57%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">7</td>
+                </tr><tr>
+                    <td class="area-name-cell">Three-Way Reconciliation</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">6</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        
+                        <div class="seg-none" style="width:100%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">6</td>
+                </tr><tr>
+                    <td class="area-name-cell">Journal Entry</td>
+                    <td class="num-cell" style="color:#107C10;">2</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">4</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:33%"></div>
+                        
+                        <div class="seg-none" style="width:67%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">6</td>
+                </tr><tr>
+                    <td class="area-name-cell">Unallocated GL Codes</td>
+                    <td class="num-cell" style="color:#107C10;">2</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        <div class="seg-full" style="width:100%"></div>
+                        
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">2</td>
+                </tr><tr>
+                    <td class="area-name-cell">Data Transformation</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">4</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        
+                        <div class="seg-none" style="width:100%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">4</td>
+                </tr><tr>
+                    <td class="area-name-cell">Error Handling</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">5</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        
+                        <div class="seg-none" style="width:100%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">5</td>
+                </tr><tr>
+                    <td class="area-name-cell">Fee Allocation</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">0</td>
+                    <td class="num-cell" style="color:#E81123;">3</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        
+                        <div class="seg-none" style="width:100%"></div>
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">3</td>
+                </tr><tr>
+                    <td class="area-name-cell">Multi-Month Consistency</td>
+                    <td class="num-cell" style="color:#107C10;">0</td>
+                    <td class="num-cell" style="color:#C08C00;">2</td>
+                    <td class="num-cell" style="color:#E81123;">0</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        
+                        <div class="seg-partial" style="width:100%"></div>
+                        
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">2</td>
+                </tr></tbody>
+            </table></div>
+            <div class="bar-legend">
+                <div class="legend-item"><div class="legend-box" style="background:#107C10;"></div> In QA Sheet</div>
+                <div class="legend-item"><div class="legend-box" style="background:#FFB900;"></div> Partially Covered</div>
+                <div class="legend-item"><div class="legend-box" style="background:#E81123;"></div> Not in QA Sheet</div>
+            </div></div>
+
+                <div class="section-header">Full UAT Audit Table — All 4 'New Ask' Items</div>
+                <p style="margin-bottom: 16px; color: #666; font-size: 15px;">Complete classification audit showing which items are correctly categorized and which should be reclassified</p>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Issue ID</th>
+                                <th>Feedback</th>
+                                <th>Current Issue Type</th>
+                                <th>Recommended</th>
+                                <th>Correct?</th>
+                                <th>Reasoning</th>
+                            </tr>
+                        </thead>
+                        <tbody id="uc02-audit-body"><tr class="correct-row">
+                    <td><strong>BU_UC02-1</strong></td>
+                    <td>What will happen when the calendar year and financial year changes? Can the months and year be added automatically for upcoming years?</td>
+                    <td>New Ask</td>
+                    <td><strong>New Ask</strong></td>
+                    <td style="color:#107C10; font-weight:600;">✓ Correct</td>
+                    <td>The BRD does not explicitly specify auto-population of future year/month dropdowns. Objective 9 mentions scalability for transaction volume growth and new merchant accounts, not calendar UI behavior. This is a legitimate new feature request.</td>
+                </tr><tr class="correct-row">
+                    <td><strong>BU_UC02-17</strong></td>
+                    <td>Add notification once the reconciliation is completed.</td>
+                    <td>New Ask</td>
+                    <td><strong>New Ask</strong></td>
+                    <td style="color:#107C10; font-weight:600;">✓ Correct</td>
+                    <td>The BRD discusses a confirmation message after submission (Step 2.15) but does not require a post-completion notification for the entire reconciliation process. This is a new feature request beyond original scope.</td>
+                </tr><tr class="misclassified-row">
+                    <td><strong>BU_UC02-18</strong></td>
+                    <td>Add discrepancy tab in the recon run dashboard.</td>
+                    <td>New Ask</td>
+                    <td><strong>Bug</strong></td>
+                    <td style="color:#E81123; font-weight:600;">✗ Misclassified</td>
+                    <td>The BRD explicitly requires discrepancy identification and documentation (Step 7D: 'Calculate variance amounts', Step 11: 'Review and research any unexplained variances', Objective 7: 'Improve Reconciliation Accuracy'). The Error Handling &amp; Monitoring Framework (Section 8) further mandates discrepancy surfacing. Without a discrepancy tab, the system fails to meet these BRD requirements.</td>
+                </tr><tr class="correct-row">
+                    <td><strong>BU_UC02-19</strong></td>
+                    <td>Add delete button in the recon process.</td>
+                    <td>New Ask</td>
+                    <td><strong>New Ask</strong></td>
+                    <td style="color:#107C10; font-weight:600;">✓ Correct</td>
+                    <td>The BRD does not specify a delete/remove reconciliation function. The process describes creating and submitting reconciliations but not deleting them. This is a legitimate new feature request.</td>
+                </tr></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== DATA =====
+        const uc01Areas = [
+            { name: "Email Trigger & Ingestion", full: 4, partial: 0, none: 0 },
+            { name: "Data Validation - Field Level", full: 0, partial: 9, none: 0 },
+            { name: "Contract Manager Workflow", full: 5, partial: 0, none: 0 },
+            { name: "Template Selection", full: 0, partial: 5, none: 0 },
+            { name: "E-Signature / DocuSign", full: 0, partial: 7, none: 0 },
+            { name: "Data Validation - Business Rules", full: 0, partial: 5, none: 0 },
+            { name: "Data Validation - Reference Data", full: 0, partial: 4, none: 0 },
+            { name: "Error Handling", full: 0, partial: 0, none: 5 },
+            { name: "Discussion Section Posting", full: 3, partial: 0, none: 0 },
+            { name: "Status Tracking", full: 2, partial: 2, none: 0 },
+            { name: "Notification Engine", full: 1, partial: 3, none: 1 },
+            { name: "UX / Interface Behavior", full: 0, partial: 0, none: 4 },
+            { name: "Audit & Compliance", full: 1, partial: 3, none: 1 },
+            { name: "Integration Points", full: 4, partial: 2, none: 4 }
+        ];
+
+        const uc02Areas = [
+            { name: "RECON Home Page & Navigation", full: 6, partial: 0, none: 2 },
+            { name: "Create New Reconciliation", full: 8, partial: 0, none: 0 },
+            { name: "Source File Upload", full: 7, partial: 0, none: 3 },
+            { name: "View & Manage Reconciliation Data", full: 2, partial: 1, none: 0 },
+            { name: "Audience View Details Tab", full: 7, partial: 0, none: 0 },
+            { name: "Previous Month AV Details Tab", full: 3, partial: 0, none: 0 },
+            { name: "Ledger File Tab", full: 3, partial: 0, none: 0 },
+            { name: "Ledger Summary Tab", full: 3, partial: 0, none: 0 },
+            { name: "TouchNet Recon Tabs", full: 6, partial: 2, none: 0 },
+            { name: "Export & Notifications", full: 3, partial: 2, none: 0 },
+            { name: "Payment Type Summary", full: 12, partial: 1, none: 1 },
+            { name: "Cash Receipts", full: 3, partial: 0, none: 2 },
+            { name: "Ending Balance", full: 4, partial: 0, none: 2 },
+            { name: "Carry Forward", full: 2, partial: 1, none: 4 },
+            { name: "Three-Way Reconciliation", full: 0, partial: 0, none: 6 },
+            { name: "Journal Entry", full: 2, partial: 0, none: 4 },
+            { name: "Unallocated GL Codes", full: 2, partial: 0, none: 0 },
+            { name: "Data Transformation", full: 0, partial: 0, none: 4 },
+            { name: "Error Handling", full: 0, partial: 0, none: 5 },
+            { name: "Fee Allocation", full: 0, partial: 0, none: 3 },
+            { name: "Multi-Month Consistency", full: 0, partial: 2, none: 0 }
+        ];
+
+        const uc01Audit = [
+            { id: "BU_UC01-5", feedback: "Dual handling for End date / Proposed end date. Independent Contractor attachment check.", current: "New Ask", recommended: "Bug", correct: false, reasoning: "BRD already specifies date validation and attachment checks as part of RPA data validation. The system is handling these incorrectly — that's a bug in existing validation logic, not a new feature request." },
+            { id: "BU_UC01-6", feedback: "Make main document template selection mandatory when available and follow correct sequence (record template then main document).", current: "New Ask", recommended: "Bug", correct: false, reasoning: "BRD Phase 2 explicitly includes 'Template selection and document generation' as a step. Enforcing the correct sequence and making it mandatory is fixing incorrect implementation of an existing BRD requirement." },
+            { id: "BU_UC01-8", feedback: "Status shows 'Under Review for Contract Type' when request is approved and contract created. Should show as completed.", current: "New Ask", recommended: "Bug", correct: false, reasoning: "The system is displaying a misleading status. The BRD covers contract status updates throughout all 3 phases. Showing wrong status is a defect." },
+            { id: "BU_UC01-11", feedback: "Slack notification for RPA errors not always arriving within 5 minutes.", current: "New Ask", recommended: "New Ask", correct: true, reasoning: "BRD mentions Slack notifications but doesn't specify a 5-minute SLA. Requesting a specific SLA is a legitimate new feature request." },
+            { id: "BU_UC01-12", feedback: "On browser refresh - the same tab needs to be opened in UC01 UI.", current: "New Ask", recommended: "Bug", correct: false, reasoning: "Preserving tab state on browser refresh is standard expected UX behavior. Losing the user's position on refresh is a defect in the application." },
+            { id: "BU_UC01-13", feedback: "Print functionality needed for contract summary page.", current: "New Ask", recommended: "New Ask", correct: true, reasoning: "BRD does not mention print functionality. This is a legitimate new feature request for enhanced usability." },
+            { id: "BU_UC01-14", feedback: "Would like batch processing for multiple contracts at once.", current: "New Ask", recommended: "New Ask", correct: true, reasoning: "BRD describes single-contract processing. Batch processing is a new capability request beyond original scope." },
+            { id: "BU_UC01-15", feedback: "Department name display alongside department code in contract list.", current: "New Ask", recommended: "New Ask", correct: true, reasoning: "BRD uses department codes. Displaying department names is an enhancement for readability, not a required feature." },
+            { id: "BU_UC01-16", feedback: "Allow CMs to set custom reminder schedules for pending contracts.", current: "New Ask", recommended: "New Ask", correct: true, reasoning: "BRD does not mention custom reminder functionality. This is a legitimate new feature request." },
+            { id: "BU_UC01-17", feedback: "Contract list sorting by multiple columns simultaneously.", current: "New Ask", recommended: "New Ask", correct: true, reasoning: "BRD does not specify multi-column sorting. This is a usability enhancement request." },
+            { id: "BU_UC01-18", feedback: "Dashboard for CM workload overview across all active contracts.", current: "New Ask", recommended: "New Ask", correct: true, reasoning: "BRD does not include a workload dashboard. This is a legitimate new feature request for better oversight." },
+            { id: "BU_UC01-19", feedback: "If the Contract Type is a match, there is no need to put anything in the discussion section of the request.", current: "New Ask", recommended: "Bug", correct: false, reasoning: "BRD specifies validation results posted to discussion section. Posting unnecessary content when there are no issues is a logic defect — the system should only flag problems, not confirmations." },
+            { id: "BU_UC01-20", feedback: "Please only list issues in the discussion section. No need to list successful items.", current: "New Ask", recommended: "Bug", correct: false, reasoning: "Same as BU_UC01-19. The BRD says the RPA should 'Inform the Contract Manager about the results.' Listing successful validations alongside failures clutters the output." },
+            { id: "BU_UC01-24", feedback: "Request 1282312 - Flagged for no attachments, but there were 2 Word Documents attached.", current: "New Ask", recommended: "Bug", correct: false, reasoning: "The system incorrectly flags a request as having no attachments when it clearly has 2 Word Documents. This is a validation logic error — the attachment detection is broken." }
+        ];
+
+        const uc02Audit = [
+            { id: "BU_UC02-1", feedback: "What will happen when the calendar year and financial year changes? Can the months and year be added automatically for upcoming years?", current: "New Ask", recommended: "New Ask", correct: true, reasoning: "The BRD does not explicitly specify auto-population of future year/month dropdowns. Objective 9 mentions scalability for transaction volume growth and new merchant accounts, not calendar UI behavior. This is a legitimate new feature request." },
+            { id: "BU_UC02-17", feedback: "Add notification once the reconciliation is completed.", current: "New Ask", recommended: "New Ask", correct: true, reasoning: "The BRD discusses a confirmation message after submission (Step 2.15) but does not require a post-completion notification for the entire reconciliation process. This is a new feature request beyond original scope." },
+            { id: "BU_UC02-18", feedback: "Add discrepancy tab in the recon run dashboard.", current: "New Ask", recommended: "Bug", correct: false, reasoning: "The BRD explicitly requires discrepancy identification and documentation (Step 7D: 'Calculate variance amounts', Step 11: 'Review and research any unexplained variances', Objective 7: 'Improve Reconciliation Accuracy'). The Error Handling & Monitoring Framework (Section 8) further mandates discrepancy surfacing. Without a discrepancy tab, the system fails to meet these BRD requirements." },
+            { id: "BU_UC02-19", feedback: "Add delete button in the recon process.", current: "New Ask", recommended: "New Ask", correct: true, reasoning: "The BRD does not specify a delete/remove reconciliation function. The process describes creating and submitting reconciliations but not deleting them. This is a legitimate new feature request." }
+        ];
+
+        // ===== RENDERING =====
+        function renderAreas(containerId, areas) {
+            const container = document.getElementById(containerId);
+            let rows = '';
+            areas.forEach(area => {
+                const total = area.full + area.partial + area.none;
+                const fPct = (area.full / total * 100).toFixed(0);
+                const pPct = (area.partial / total * 100).toFixed(0);
+                const nPct = (area.none / total * 100).toFixed(0);
+                rows += `<tr>
+                    <td class="area-name-cell">${area.name}</td>
+                    <td class="num-cell" style="color:#107C10;">${area.full}</td>
+                    <td class="num-cell" style="color:#C08C00;">${area.partial}</td>
+                    <td class="num-cell" style="color:#E81123;">${area.none}</td>
+                    <td class="bar-cell"><div class="mini-bar">
+                        ${area.full > 0 ? `<div class="seg-full" style="width:${fPct}%"></div>` : ''}
+                        ${area.partial > 0 ? `<div class="seg-partial" style="width:${pPct}%"></div>` : ''}
+                        ${area.none > 0 ? `<div class="seg-none" style="width:${nPct}%"></div>` : ''}
+                    </div></td>
+                    <td class="num-cell" style="color:#999;">${total}</td>
+                </tr>`;
+            });
+            container.innerHTML = `<div class="table-wrapper"><table class="coverage-table">
+                <colgroup>
+                    <col style="width:38%">
+                    <col style="width:8%">
+                    <col style="width:8%">
+                    <col style="width:10%">
+                    <col style="width:28%">
+                    <col style="width:8%">
+                </colgroup>
+                <thead><tr>
+                    <th style="text-align:left;">Functional Area</th>
+                    <th>In QA</th>
+                    <th>Partial</th>
+                    <th>Not in QA</th>
+                    <th>Coverage</th>
+                    <th>Total</th>
+                </tr></thead>
+                <tbody>${rows}</tbody>
+            </table></div>
+            <div class="bar-legend">
+                <div class="legend-item"><div class="legend-box" style="background:#107C10;"></div> In QA Sheet</div>
+                <div class="legend-item"><div class="legend-box" style="background:#FFB900;"></div> Partially Covered</div>
+                <div class="legend-item"><div class="legend-box" style="background:#E81123;"></div> Not in QA Sheet</div>
+            </div>`;
+        }
+
+        function renderAudit(containerId, items) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = items.map(item => {
+                const rowClass = item.correct ? 'correct-row' : 'misclassified-row';
+                const statusIcon = item.correct ? '&#10003; Correct' : '&#10007; Misclassified';
+                const statusColor = item.correct ? '#107C10' : '#E81123';
+                return `<tr class="${rowClass}">
+                    <td><strong>${item.id}</strong></td>
+                    <td>${item.feedback}</td>
+                    <td>${item.current}</td>
+                    <td><strong>${item.recommended}</strong></td>
+                    <td style="color:${statusColor}; font-weight:600;">${statusIcon}</td>
+                    <td>${item.reasoning}</td>
+                </tr>`;
+            }).join('');
+        }
+
+        // ===== TAB SWITCHING =====
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+            document.getElementById(tab).classList.add('active');
+            const navItems = document.querySelectorAll('.nav-item');
+            const idx = tab === 'overview' ? 0 : tab === 'uc01' ? 1 : 2;
+            if (navItems[idx]) navItems[idx].classList.add('active');
+        }
+
+        // ===== INIT =====
+        renderAreas('uc01-areas', uc01Areas);
+        renderAreas('uc02-areas', uc02Areas);
+        renderAudit('uc01-audit-body', uc01Audit);
+        renderAudit('uc02-audit-body', uc02Audit);
+    </script>
+
+
+</body></html>
